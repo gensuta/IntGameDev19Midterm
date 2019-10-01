@@ -6,12 +6,9 @@ public class AudioController : MonoBehaviour
 {
 
     public AudioSource aud;
-
+    public AudioSource sfxAud; // handles sfx
     [Space]
-    [Header("Bools")]
-    public bool didStart;
     public bool fadingIn;
-    public bool hasLastBeatPassed;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +52,12 @@ public class AudioController : MonoBehaviour
         aud.clip = song;
         aud.Play();
         fadingIn = true;
-
     }
+
+    public void PlaySFX(AudioClip clip, float vol = 1f)
+    {
+        sfxAud.clip = clip;
+        sfxAud.Play();
+    }
+
 }

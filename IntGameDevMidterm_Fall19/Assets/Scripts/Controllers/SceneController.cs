@@ -8,7 +8,7 @@ public class SceneController : MonoBehaviour
     // to keep track of score and other things as you proceed from level to level
     public int currentScene;
 
-    public static SceneController sC;
+    public  SceneController sC;
 
     public float timer;
     public bool timerIsOn;
@@ -19,15 +19,6 @@ public class SceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (sC == null)
-        {
-            sC = this;
-        }
-        else if (sC != this)
-        {
-            Destroy(gameObject);
-        }
-
         storedName = "";
         timer = 0.5f;
         timerIsOn = true;
