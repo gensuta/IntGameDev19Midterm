@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioController : MonoBehaviour
+public class BattleHandler : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
