@@ -22,7 +22,6 @@ public class BattleHandler : MonoBehaviour
     public TextMeshProUGUI goalTxt;
     public Animator goalAnim;
 
-
     public PlayerActions player;
     public int unwantedBP; // the bp amt that will make the player lose
     public bool isIncreasingBp; // are we, the player, taking down someone's bp or increasing it?
@@ -32,10 +31,17 @@ public class BattleHandler : MonoBehaviour
     public bool isPlayerTurn;
     public float actionTimer = 1.5f; //here to slow shit down!!
 
+    [TextArea(2,5)]
+    public string[] loseWords;
+    [TextArea(2, 5)]
+    public string[] tutWords;
+    public int tracker;
+
 
     // Start is called before the first frame update
     void Awake()
     {
+        tracker = 0;
         dh = FindObjectOfType<DialogueHandler>();
         player = FindObjectOfType<PlayerActions>();
         oa = FindObjectOfType<OpponentActions>();
@@ -49,7 +55,11 @@ public class BattleHandler : MonoBehaviour
         opponentBP = opponent.currentBp;
         playerBP = player.bp;
 
-        ShowGoal();
+        if(!gc.isFirstBattle)
+        {
+            ShowGoal();
+        }
+        
     }
 
     // Update is called once per frame
@@ -91,21 +101,47 @@ public class BattleHandler : MonoBehaviour
                     {
                         //gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
-                        dh.DisplayBattleText("Battle over!\n You didn't break down yet! :D ",1.5f);
+                        dh.DisplayBattleText("Battle over!\n You didn't break down yet! :D ");
                         sc.WaitThenTransitionAndLoad("Hallway", 3f, 2);
+                        doOnce = true;
                     }
                     else
                     {
-                        dh.DisplayBattleText("Somethings coming. ",1f);
-                        dh.DisplayBattleText("I don't think you got this one today, and that's ok. ");
-                        dh.DisplayBattleText("But brace yourself. I know you don't like to lose. ");
-                        sc.WaitThenLoad("Boss Battle", 7f);
+                        if (!dh.isActive)
+                        {
+                            if (tracker < loseWords.Length)
+                            {
+                                dh.DisplayBattleText(loseWords[tracker]);
+                                tracker++;
+                            }
+                            else
+                            {
+                                sc.WaitThenLoad("Boss Battle", 1.5f,2);
+                            }
+                        }
                     }
-                    doOnce = true;
+                    
                 }
                
             }
-
+        }
+        else
+        {
+            Debug.Log(tutWords.Length);
+            if (!dh.isActive)
+            {
+                if (tracker < tutWords.Length)
+                {
+                    dh.DisplayBattleText(tutWords[tracker]);
+                    tracker++;
+                }
+                else
+                {
+                    tracker = 0;
+                    gc.isFirstBattle = false;
+                    ShowGoal();
+                }
+            }
         }
     }
 
@@ -114,11 +150,21 @@ public class BattleHandler : MonoBehaviour
         goalAnim.gameObject.SetActive(true);
         if(desiredBP >0)
         {
-            goalTxt.text = "MAKE THAT BOND!\nMake it go up!";
+            goalTxt.text = "MAKE THAT BOND!\nIncrease their bond points to 20!";
         }
         else
         {
-            goalTxt.text = "BREAK THE BOND!\nMake it go down!";
+            goalTxt.text = "BREAK THE BOND!\nDecrease their bond points to 0!";
+        }
+
+
+        if (unwantedBP > 0)
+        {
+            goalTxt.text += "\nBut don't let them make a bond with you...";
+        }
+        else
+        {
+            goalTxt.text += "\nBut don't let them break the bond they have with you...";
         }
         goalAnim.SetBool("canStart", true);
     }

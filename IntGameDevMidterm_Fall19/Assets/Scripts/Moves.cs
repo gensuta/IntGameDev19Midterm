@@ -17,18 +17,16 @@ public class Moves : ScriptableObject
 
     public void UseMove(Character target, PlayerActions player)
     {
-        if (doesDmg)
-        {
-            if(target._type == moveType)
-            {
-                target.currentBp -= DetermineTrueAmount(moveType,target._type,amount);
-            }
-           
-        }
-        else
-        {
-            target.currentBp += DetermineTrueAmount(moveType, target._type,amount);
-        }
+		if (doesDmg)
+		{
+
+			target.currentBp -= DetermineTrueAmount(moveType, target._type, amount);
+
+		}
+		else
+		{
+			target.currentBp += DetermineTrueAmount(moveType, target._type, amount);
+		}
         player.mp -= moveCost;
     }
 
@@ -36,18 +34,16 @@ public class Moves : ScriptableObject
     {
         GameController.Types playerType = target.myPersonas[target.currentPersona]._type;
 
-        if (doesDmg)
-        {
-            if (playerType == moveType)
-            {
-                target.bp -= DetermineTrueAmount(moveType, playerType, amount);
-            }
+		if (doesDmg)
+		{
 
-        }
-        else
-        {
-            target.bp += DetermineTrueAmount(moveType, playerType, amount);
-        }
+			target.bp -= DetermineTrueAmount(moveType, playerType, amount);
+
+		}
+		else
+		{
+			target.bp += DetermineTrueAmount(moveType, playerType, amount);
+		}
     }
 
     public int DetermineTrueAmount(GameController.Types type1, GameController.Types type2, int amt )

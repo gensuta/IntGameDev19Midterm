@@ -5032,8 +5032,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 34.6}
-  m_SizeDelta: {x: 604.9, y: 131.4}
+  m_AnchoredPosition: {x: 0, y: 79.4}
+  m_SizeDelta: {x: 782.1, y: 248.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1648028413
 MonoBehaviour:
@@ -5085,14 +5085,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 57.95
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 258
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -5299,6 +5299,22 @@ MonoBehaviour:
   opponent: {fileID: 0}
   isPlayerTurn: 0
   actionTimer: 1.5
+  loseWords:
+  - Somethings coming.
+  - I don't think you got this one today, and that's ok.
+  - But brace yourself. I know you don't like to lose.
+  tutWords:
+  - 'WOAH! IT LOOKS LIKE <I>YOU''RE</I> IN A STRESSFUL SITUATION! '
+  - 'FEAR NOT!<size=25>...For I am here to explain this.</size> '
+  - There are 3 types of people in this word.
+  - The <i>tired</i>, the <b>lively</b>, and the <u>kind</u>.
+  - 'The <i>Tired</i> one ups the <b>lively</b>. '
+  - 'The <b>Lively</b> one ups the <u>kind</u>. '
+  - The <i>Kind</i> one ups the <u>tired</u>.
+  - And you...
+  - You're all of them and none of them.
+  - But that doesn't matter now!! It's battle time!!!
+  tracker: 0
 --- !u!4 &1675629545
 Transform:
   m_ObjectHideFlags: 0

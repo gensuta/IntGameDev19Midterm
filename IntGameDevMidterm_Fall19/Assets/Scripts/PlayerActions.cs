@@ -63,6 +63,8 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
         storedBp = bp;
         storedMp = mp;
+
+        ShowPersonaFX();
     }
 
     // Update is called once per frame
@@ -86,6 +88,15 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
                 BackToMainMenu();
             }
         }
+    }
+
+    void ShowPersonaFX()
+    {
+        if(GameObject.FindWithTag("fx") != null)
+        {
+            Destroy(GameObject.FindWithTag("fx"));
+        }
+        Instantiate(myPersonas[currentPersona].ps);
     }
 
     void UpdateUI()

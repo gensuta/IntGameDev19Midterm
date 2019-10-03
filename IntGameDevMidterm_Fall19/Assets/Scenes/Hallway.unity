@@ -3010,9 +3010,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a05a5884b1d14408a351088cac0a8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirstBattle: 0
+  isFirstBattle: 1
   storedChar: {fileID: 0}
-  currentOpponent: 0
+  whichOpponent: 0
   opponents:
   - {fileID: 11400000, guid: 5d39189e383a9485fa4ea08c459cb3fa, type: 2}
   - {fileID: 11400000, guid: 39d74e54f42904340abfd0adc29befa8, type: 2}
