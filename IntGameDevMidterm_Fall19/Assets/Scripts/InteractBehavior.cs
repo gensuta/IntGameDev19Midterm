@@ -10,7 +10,7 @@ public class InteractBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _name = character.name;
     }
 
     // Update is called once per frame

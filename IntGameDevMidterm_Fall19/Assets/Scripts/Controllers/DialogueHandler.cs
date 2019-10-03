@@ -29,17 +29,18 @@ public class DialogueHandler : MonoBehaviour
     public bool isActive;// are things showing?
     public bool already; // did you press space already?
 
+    AudioController ac;
+    SceneController sc;
+
+    public int whichVoice;
+
     // Use this for initialization
     void Start()
     {
-        if (isActive)
-        {
-            EnableTextBox();
-        }
-        else
-        {
-            DisableTextBox();
-        }
+        ac = FindObjectOfType<AudioController>();
+        sc = FindObjectOfType<SceneController>();
+
+
     }
 
     // Update is called once per frame
@@ -52,7 +53,7 @@ public class DialogueHandler : MonoBehaviour
                 if (!isTyping) // if no text is typing go to next line OR disable textbox
                 {
                     currentLine += 1;
-                    if (currentLine >= myLines.Count - 1)
+                    if (currentLine >= myLines.Count )
                     {
                         DisableTextBox();
                     }
@@ -86,6 +87,7 @@ public class DialogueHandler : MonoBehaviour
 
         while (isTyping && !cancelTyping && (letter < _text.text.Length - 1))
         {
+            ac.PlayVoiceClip(ac.voiceClips[whichVoice]);
             letter += 1;
             _text.maxVisibleCharacters = letter;
             yield return new WaitForSeconds(textSpeed);
@@ -105,9 +107,15 @@ public class DialogueHandler : MonoBehaviour
 
     public void DisableTextBox()
     {
+        already = false;
         isActive = false;
         textHolder.SetActive(false);
         _text.text = "";
+        sc.WaitThenLoad("Battle", 1f,1);
+        //to ensure the label is off during the transition
+        label.SetActive(false);
+        FindObjectOfType<PlayerMovement>().GetComponent<BoxCollider>().enabled = false;
+
     }
     public bool DoesContain(string theThing)
     {

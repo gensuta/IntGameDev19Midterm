@@ -9,6 +9,7 @@ public class AudioController : MonoBehaviour
     public AudioSource sfxAud; // handles sfx
     [Space]
     public bool fadingIn;
+    public AudioClip[] voiceClips; // 0 tired, 1 kind, 2 lively
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +57,13 @@ public class AudioController : MonoBehaviour
 
     public void PlaySFX(AudioClip clip, float vol = 1f)
     {
+        sfxAud.clip = clip;
+        sfxAud.Play();
+    }
+
+    public void PlayVoiceClip(AudioClip clip)
+    {
+        sfxAud.pitch = Random.Range(3, -3);
         sfxAud.clip = clip;
         sfxAud.Play();
     }

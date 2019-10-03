@@ -5,20 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    // to keep track of score and other things as you proceed from level to level
     public int currentScene;
-
-    public  SceneController sC;
-
     public float timer;
     public bool timerIsOn;
 
     public string storedName;
 
+    TransitionHandler th;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        th = FindObjectOfType<TransitionHandler>();
         storedName = "";
         timer = 0.5f;
         timerIsOn = true;
@@ -105,9 +104,10 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(sName);
     }
 
-    public void WaitThenLoad(string sName, float time)
+    public void WaitThenLoad(string sName, float time, int transition = 0)
     {
-        timerIsOn = true;
+        th.PlayAnim(transition);
+        timerIsOn = true; 
         timer = time;
         storedName = sName;
     }

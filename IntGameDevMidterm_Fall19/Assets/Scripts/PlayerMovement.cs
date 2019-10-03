@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     DialogueHandler dh;
 
     bool nearObj;
+    public bool canJump = true;
 
     // Start is called before the first frame update
     void Start()
@@ -27,28 +28,52 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-
+        rotateDir = DirConstraints(Input.GetAxis("Horizontal"));
+        movementDir = DirConstraints(Input.GetAxis("Vertical"));
     }
 
     private void FixedUpdate()
     {
-        rotateDir = DirConstraints(Input.GetAxis("Horizontal"));
-        movementDir = DirConstraints(Input.GetAxis("Vertical"));
 
-        if (Input.GetButton("Horizontal")) // rotate with left/right or ad
+        if (!dh.isActive)
         {
-            rb.AddTorque(transform.up * rotateSpeed * rotateDir, ForceMode.Force);
+            if (Input.GetButton("Horizontal")) // rotate with left/right or ad
+            {
+                transform.Rotate(0, rotateSpeed * rotateDir, 0);
+                if (canJump)
+                {
+                    rb.drag = 1;
+                }
+            }
+
+            if (Input.GetButton("Vertical")) // move with up/down or ws
+            {
+                rb.AddForce(transform.forward * moveSpeed * movementDir, ForceMode.Force);
+                if (canJump)
+                {
+                    rb.drag = 1;
+                }
+            }
+            if (Input.GetButtonUp(("Horizontal")))
+            {
+                rb.drag = 5;
+            }
+            if (Input.GetButtonUp(("Vertical")))
+            {
+                rb.drag = 5;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && canJump) // jump
+            {
+                rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+                canJump = false;
+            }
+        }
+        if (!canJump && rb.velocity.y> 1.5f)
+        {
+            rb.velocity += Vector3.up * Physics2D.gravity.y * (jumpSpeed - 1) * Time.deltaTime;
         }
 
-        if (Input.GetButton("Vertical")) // move with up/down or ws
-        {
-            rb.AddForce(transform.forward * moveSpeed * movementDir, ForceMode.Force);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space)) // jump
-        {
-            rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
-        }
     }
 
     int DirConstraints(float dir)
@@ -67,6 +92,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == ("Ground") && !nearObj)
+        {
+            canJump = true;
+        }
+    }
+
     private void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.GetComponent<InteractBehavior>() != null && !dh.isActive)
@@ -75,24 +108,12 @@ public class PlayerMovement : MonoBehaviour
             InteractBehavior interact = collision.gameObject.GetComponent<InteractBehavior>();
             dh.label.SetActive(true);
             dh.labelText.text = interact._name;
-
+            canJump = false;
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                dh.label.SetActive(false);
-                dh.myLines.Clear();
-                foreach (string line in interact.character.exploreLines)
-                {
-                    dh.myLines.Add(line);
-                }
-                dh.currentLine = 0;
-                dh.EnableTextBox();
-
-                //dc.CheckWhosTalking(dc.myLines[dc.currentLine]);
-                //dc.textHolder.SetActive(true);
-                //dc._text.text = dc.myLines[dc.currentLine];
+                StartConversation(interact);
 
             }
-
         }
     }
     private void OnTriggerExit(Collider collision)
@@ -102,5 +123,35 @@ public class PlayerMovement : MonoBehaviour
             nearObj = false;
             dh.label.SetActive(false);
         }
+    }
+
+    public void StartConversation(InteractBehavior interact)
+    {
+        switch (interact.character._type)
+        {
+            case (GameController.Types.tiredness):
+                dh.whichVoice = 0;
+                break;
+            case (GameController.Types.kindness):
+                dh.whichVoice = 1;
+                break;
+            case (GameController.Types.liveliness):
+                dh.whichVoice = 2;
+                break;
+        }
+
+        dh.currentLine = 0;
+        dh.label.SetActive(false);
+        dh.myLines.Clear();
+        foreach (string line in interact.character.exploreLines)
+        {
+            dh.myLines.Add(line);
+        }
+
+        dh.EnableTextBox();
+
+        //dc.CheckWhosTalking(dc.myLines[dc.currentLine]);
+        //dc.textHolder.SetActive(true);
+        //dc._text.text = dc.myLines[dc.currentLine];
     }
 }
