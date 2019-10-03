@@ -64,7 +64,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         storedBp = bp;
         storedMp = mp;
 
-        ShowPersonaFX();
+      //  ShowPersonaFX();
     }
 
     // Update is called once per frame

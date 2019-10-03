@@ -9,7 +9,7 @@ public class Personas : ScriptableObject
     public string _name;
 
     public Sprite neutralPose;
-    public ParticleSystem ps;
+    public GameObject ps;
 
     public GameController.Types _type; // is this character lively, tired, or kind?
 

@@ -30,13 +30,13 @@ public class SceneController : MonoBehaviour
     {
         currentScene = SceneManager.GetActiveScene().buildIndex;
 
-        if (currentScene == 0)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) && !timerIsOn) // keeps people from starting the game too fast
-            {
-                ForwardAScene();
-            }
-        }
+        //if (currentScene == 0)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Space) && !timerIsOn) // keeps people from starting the game too fast
+        //    {
+        //        ForwardAScene();
+        //    }
+        //}
 
         if (Input.GetKey(KeyCode.LeftControl))
         {
