@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
+    SceneController sc;
 
     public AudioSource aud;
     public AudioSource sfxAud; // handles sfx
@@ -15,11 +16,17 @@ public class AudioController : MonoBehaviour
     void Start()
     {
         aud = GetComponent<AudioSource>();
+        sc = FindObjectOfType<SceneController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(sfxAud == null)
+        {
+            GetSFXSource();
+        }
+
         if (fadingIn)
         {
             if (aud.volume < 1f)
@@ -66,6 +73,22 @@ public class AudioController : MonoBehaviour
         sfxAud.pitch = Random.Range(3, -3);
         sfxAud.clip = clip;
         sfxAud.Play();
+    }
+
+    public void GetSFXSource()
+    {
+        if(sc.GetSceneName() == "Hallway")
+        {
+            PlayerMovement player = FindObjectOfType<PlayerMovement>();
+            sfxAud = player.GetComponent<AudioSource>();
+
+        }
+        //it gotta be a battle scene lol
+        else
+        {
+            PlayerActions player = FindObjectOfType<PlayerActions>();
+            sfxAud = player.GetComponent<AudioSource>();
+        }
     }
 
 }

@@ -15,7 +15,7 @@ public class Moves : ScriptableObject
     public int moveCost;
 
 
-    public void UseMove(Character target)
+    public void UseMove(Character target, PlayerActions player)
     {
         if (doesDmg)
         {
@@ -29,6 +29,25 @@ public class Moves : ScriptableObject
         {
             target.currentBp += DetermineTrueAmount(moveType, target._type,amount);
         }
+        player.mp -= moveCost;
+    }
+
+    public void UseMoveOnPlayer(PlayerActions target)
+    {
+        GameController.Types playerType = target.myPersonas[target.currentPersona]._type;
+
+        if (doesDmg)
+        {
+            if (playerType == moveType)
+            {
+                target.bp -= DetermineTrueAmount(moveType, playerType, amount);
+            }
+
+        }
+        else
+        {
+            target.bp += DetermineTrueAmount(moveType, playerType, amount);
+        }
     }
 
     public int DetermineTrueAmount(GameController.Types type1, GameController.Types type2, int amt )
@@ -39,6 +58,7 @@ public class Moves : ScriptableObject
         {
             if(type2 == GameController.Types.tiredness)
             {
+                Debug.Log("SUPER EFFECTIVE!");
                 trueAmt *= 2;
             }
         }
@@ -46,6 +66,7 @@ public class Moves : ScriptableObject
         {
             if (type2 == GameController.Types.kindness)
             {
+                Debug.Log("SUPER EFFECTIVE!");
                 trueAmt *= 2;
             }
         }
@@ -53,10 +74,10 @@ public class Moves : ScriptableObject
         {
             if (type2 == GameController.Types.liveliness) // no matter how upbeat u r 
             {
+                Debug.Log("SUPER EFFECTIVE!");
                 trueAmt *= 2;
             }
         }
-
 
         return trueAmt;
     }

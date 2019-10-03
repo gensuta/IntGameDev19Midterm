@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5dc0cccd753a4a1fbf0c5ce6bc71b99, type: 3}
   m_Name: Shy
   m_EditorClassIdentifier: 
-  _name: 
+  _name: Shy
   neutralPose: {fileID: 0}
   ps: {fileID: 0}
   _type: 0
-  moves: []
+  moves:
+  - {fileID: 11400000, guid: 92b489ac1a8ac478c970bc1234070006, type: 2}
+  - {fileID: 11400000, guid: 9f8aaae1628f54b8c9bfad54534adf7d, type: 2}
+  - {fileID: 11400000, guid: 8467ebbe97ea943ea9d7211d0f3d10a6, type: 2}
   animControl: {fileID: 0}

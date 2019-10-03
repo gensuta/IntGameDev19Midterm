@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 public class DialogueHandler : MonoBehaviour
 {
+    public bool isBattleMode;
+    [Space]
     //appears when in area of object
     [Header("Label Related")]
     public GameObject label;
@@ -39,8 +41,6 @@ public class DialogueHandler : MonoBehaviour
     {
         ac = FindObjectOfType<AudioController>();
         sc = FindObjectOfType<SceneController>();
-
-
     }
 
     // Update is called once per frame
@@ -93,7 +93,7 @@ public class DialogueHandler : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
 
-        _text.text = lineoftext;
+        _text.maxVisibleCharacters = _text.text.Length - 1;
         isTyping = false;
         cancelTyping = false;
     }
@@ -111,10 +111,13 @@ public class DialogueHandler : MonoBehaviour
         isActive = false;
         textHolder.SetActive(false);
         _text.text = "";
-        sc.WaitThenLoad("Battle", 1f,1);
-        //to ensure the label is off during the transition
-        label.SetActive(false);
-        FindObjectOfType<PlayerMovement>().GetComponent<BoxCollider>().enabled = false;
+        if (!isBattleMode)
+        {
+            sc.WaitThenLoad("Battle", 1f, 1);
+            //to ensure the label is off during the transition
+            label.SetActive(false);
+            FindObjectOfType<PlayerMovement>().GetComponent<BoxCollider>().enabled = false;
+        }
 
     }
     public bool DoesContain(string theThing)

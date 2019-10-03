@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     float movementDir;
 
     DialogueHandler dh;
+    GameController gc;
 
     bool nearObj;
     public bool canJump = true;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         dh = FindObjectOfType<DialogueHandler>();
+        gc = FindObjectOfType<GameController>();
     }
 
     // Update is called once per frame
@@ -94,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == ("Ground") && !nearObj)
+        if(collision.gameObject.tag == ("Ground") && !nearObj)
         {
             canJump = true;
         }
@@ -127,6 +129,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartConversation(InteractBehavior interact)
     {
+        dh.nameTxt.text = interact.character._name;
+        gc.storedChar = Instantiate(interact.character); // this is so we never DIRECTLY edit the object in the folder during the battle
         switch (interact.character._type)
         {
             case (GameController.Types.tiredness):

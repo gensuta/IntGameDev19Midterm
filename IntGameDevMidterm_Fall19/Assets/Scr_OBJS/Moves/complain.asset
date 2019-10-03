@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5999c2d582bda4c92b7a59b4f23c9b14, type: 3}
   m_Name: complain
   m_EditorClassIdentifier: 
-  _name: 
-  doesDmg: 0
-  amount: 0
+  _name: complain
+  doesDmg: 1
+  amount: 4
   moveType: 1
-  moveCost: 0
+  moveCost: 3

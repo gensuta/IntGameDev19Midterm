@@ -12,11 +12,12 @@ public class SceneController : MonoBehaviour
     public string storedName;
 
     TransitionHandler th;
-
+    AudioController ac;
 
     // Start is called before the first frame update
     void Start()
     {
+        ac = FindObjectOfType<AudioController>();
         th = FindObjectOfType<TransitionHandler>();
         storedName = "";
         timer = 0.5f;
@@ -97,11 +98,14 @@ public class SceneController : MonoBehaviour
     public void LoadScene(int num)
     {
         SceneManager.LoadScene(num);
+        ac.GetSFXSource();
     }
 
     public void LoadScene(string sName)
     {
         SceneManager.LoadScene(sName);
+        ac.GetSFXSource();
+
     }
 
     public void WaitThenLoad(string sName, float time, int transition = 0)

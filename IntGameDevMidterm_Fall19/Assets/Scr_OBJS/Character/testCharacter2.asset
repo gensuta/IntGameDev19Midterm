@@ -9,15 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5dc0cccd753a4a1fbf0c5ce6bc71b99, type: 3}
-  m_Name: Bubbly
+  m_Script: {fileID: 11500000, guid: b93a1a0fa9bb84ea28e6ac109a059f95, type: 3}
+  m_Name: testCharacter2
   m_EditorClassIdentifier: 
-  _name: Bubbly
-  neutralPose: {fileID: 0}
-  ps: {fileID: 0}
+  _name: kindy
+  maxBp: 10
+  currentBp: 0
   _type: 2
+  willBreakBond: 0
+  bondWanted: 1
+  exploreLines:
+  - heyyy!
+  - what's going on?
+  - wanna chat for a bit?
+  defeatLines: []
   moves:
-  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
   - {fileID: 11400000, guid: e26ce65bf79bb4cecb452abbdc0582fe, type: 2}
-  - {fileID: 11400000, guid: 3946cddc7d43a45409f05c8e4bd367af, type: 2}
-  animControl: {fileID: 0}
+  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
