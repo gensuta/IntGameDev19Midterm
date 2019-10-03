@@ -7,15 +7,24 @@ using TMPro;
 public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 {
     BattleHandler bh;
+    CameraHandler ch;
+    AudioController ac;
+    DialogueHandler dh;
 
     public Personas[] myPersonas;
     public int currentPersona;
-  
+
+    float storedBp;
+    float storedMp;
+
+    [Space]
     public int bp;
     public int mp;
+    public float lerpSpeed = 0.25f; // for slider
 
     [Space]
     [Header("UI mess")]
+    public GameObject backButton;
     public TextMeshProUGUI bpTxt;
     public TextMeshProUGUI mpTxt;
     public Slider bpSlider;
@@ -26,15 +35,22 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     public GameObject moveHolder;
     public GameObject personaHolder;
 
+    bool waitForText;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        dh = FindObjectOfType<DialogueHandler>();
+        ac = FindObjectOfType<AudioController>();
+        ch = FindObjectOfType<CameraHandler>();
+        bh = FindObjectOfType<BattleHandler>();
+
         bpSlider.maxValue = 20;
         mpSlider.maxValue = 20;
 
         mp = 20;
-        bh = FindObjectOfType<BattleHandler>();
+ 
 
         if (bh.opponent.willBreakBond)
         {
@@ -44,12 +60,24 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         {
             bp = 0;
         }
+
+        storedBp = bp;
+        storedMp = mp;
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateUI();
+
+        if(waitForText)
+        {
+            if(!dh.isActive)
+            {
+                ch.ChangeCamAnim(0);
+                waitForText = false;
+            }
+        }
 
         if (Input.GetKey(KeyCode.Alpha0))
         {
@@ -62,10 +90,12 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
     void UpdateUI()
     {
+        storedMp = Mathf.Lerp(storedMp, mp, lerpSpeed * Time.deltaTime);
+        storedBp = Mathf.Lerp(storedBp, bp, lerpSpeed * Time.deltaTime);
         bpTxt.text = "Bond Points: " + bp;
         mpTxt.text = "Mindful Points: " + mp;
-        bpSlider.value = bp;
-        mpSlider.value = mp;
+        bpSlider.value = storedBp;
+        mpSlider.value = storedMp;
     }
 
 
@@ -73,6 +103,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     {
         if (mp > 0)
         {
+            backButton.SetActive(true);
             actionHolder.SetActive(false);
             moveHolder.SetActive(true);
             int whichMove = 0;
@@ -84,7 +115,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         }
         else
         {
-            Debug.Log("hey, don't forget to breathe");
+            dh.DisplayBattleText("Hey, don't forget to <i>breathe</i>.");
         }
     }
 
@@ -92,9 +123,12 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
     public void ShowPersonas()
     {
+        backButton.SetActive(true);
         actionHolder.SetActive(false);
         personaHolder.SetActive(true);
         int whichP = 0;
+        ch.ChangeCamAnim(3);
+
         foreach (Button button in personaHolder.GetComponentsInChildren<Button>())
         {
             button.GetComponentInChildren<TextMeshProUGUI>().text = myPersonas[whichP]._name;
@@ -108,12 +142,12 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     {
         if(whichPersona == currentPersona)
         {
-            Debug.Log("silly! you have that persona equipped already!");
+            dh.DisplayBattleText("Silly! You have that persona equipped already!");
         }
         else
         {
             currentPersona = whichPersona;
-            Debug.Log("you're new persona is " + myPersonas[currentPersona]._name);
+            dh.DisplayBattleText("You're new persona is <color=red>" + myPersonas[currentPersona]._name + "</color>");
             EndPlayerTurn();
         }
 
@@ -124,13 +158,13 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         if(mp < 20)
         {
             mp += Random.Range(3, 7);
+            EndPlayerTurn();
         }
         else
         {
-            Debug.Log("silly! your mp is already full!");
+            dh.DisplayBattleText("Silly! Your MP is already full!");
 
         }
-        EndPlayerTurn();
     }
 
     public void Stare() // restore bp
@@ -140,10 +174,11 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
             if(bp < 20)
             {
                 bp += Random.Range(1, 5);
+                EndPlayerTurn();
             }
             else
             {
-                Debug.Log("silly! your bp is already full!");
+                dh.DisplayBattleText("Silly! Your BP is already <i>full!</i>");
             }
         }
         else
@@ -151,14 +186,13 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
             if (bp > 0)
             {
                 bp -= Random.Range(1, 5);
+                EndPlayerTurn();
             }
             else
             {
-                Debug.Log("silly! your bp is already empty!");
+                dh.DisplayBattleText("Silly! Your BP is already <i>empty!</i>");
             }
-        }
-
-        EndPlayerTurn();
+        }        
     }
 
     public void SelectMove(int whichMove)
@@ -167,17 +201,22 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         if (currentMove.amount < mp)
         {
             currentMove.UseMove(bh.opponent, this);
-            Debug.Log("player used " + currentMove + " on " + bh.opponent._name);
+            dh.DisplayBattleText("You used " + currentMove._name + " on " + bh.opponent._name);
             EndPlayerTurn();
         }
         else
         {
-            Debug.Log("Hey, maybe you need to zone out for a bit");
+            dh.DisplayBattleText("Hey, maybe you need to zone out for a bit");
         }
     }
 
     public void BackToMainMenu()
     {
+        if (!dh.isActive)
+        {
+            ch.ChangeCamAnim(0);
+        }
+        backButton.SetActive(false);
         moveHolder.SetActive(false);
         personaHolder.SetActive(false);
         actionHolder.SetActive(true);
@@ -185,6 +224,10 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
     public void BeginPlayerTurn()
     {
+        if (dh.isActive)
+        {
+            waitForText = true;
+        }
         ShowOrHideActions(true);
         bh.isPlayerTurn = true;
 
@@ -192,6 +235,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
     public void EndPlayerTurn()
     {
+        ch.ChangeCamAnim(1);
         bh.actionTimer = 1.5f;
         bh.isPlayerTurn = false;
         BackToMainMenu();

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: testCharacter
   m_EditorClassIdentifier: Assembly-CSharp::Character
   isDefeated: 0
-  _name: testy
+  _name: sleepy
   maxBp: 10
   currentBp: 10
   _type: 1
@@ -25,4 +25,4 @@ MonoBehaviour:
   defeatLines: []
   moves:
   - {fileID: 11400000, guid: 9e4396fd203694c45ad40fe579e5c77c, type: 2}
-  - {fileID: 11400000, guid: 3946cddc7d43a45409f05c8e4bd367af, type: 2}
+  - {fileID: 11400000, guid: ab1168c6ea50747c3b79f7d23a2a5396, type: 2}

@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class BattleHandler : MonoBehaviour
 {
     GameController gc;
     AudioController ac;
     SceneController sc;
-
+    public DialogueHandler dh;
     OpponentActions oa;
 
     bool doOnce;
@@ -17,21 +19,24 @@ public class BattleHandler : MonoBehaviour
     int desiredBP;
     int playerBP;
 
+    public TextMeshProUGUI goalTxt;
+    public Animator goalAnim;
+
 
     public PlayerActions player;
     public int unwantedBP; // the bp amt that will make the player lose
-
     public bool isIncreasingBp; // are we, the player, taking down someone's bp or increasing it?
     public Character opponent;
-    public bool isPlayerTurn;
 
+
+    public bool isPlayerTurn;
     public float actionTimer = 1.5f; //here to slow shit down!!
 
 
     // Start is called before the first frame update
     void Awake()
     {
-        
+        dh = FindObjectOfType<DialogueHandler>();
         player = FindObjectOfType<PlayerActions>();
         oa = FindObjectOfType<OpponentActions>();
         gc = FindObjectOfType<GameController>();
@@ -43,6 +48,8 @@ public class BattleHandler : MonoBehaviour
         isPlayerTurn = true;
         opponentBP = opponent.currentBp;
         playerBP = player.bp;
+
+        ShowGoal();
     }
 
     // Update is called once per frame
@@ -84,15 +91,15 @@ public class BattleHandler : MonoBehaviour
                     {
                         //gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
-                        Debug.Log("Battle over! You didn't break down yet!");
-                        sc.WaitThenLoad("Hallway", 1f, 2);
+                        dh.DisplayBattleText("Battle over!\n You didn't break down yet! :D ",1.5f);
+                        sc.WaitThenTransitionAndLoad("Hallway", 3f, 2);
                     }
                     else
                     {
-                        Debug.Log("Somethings coming.");
-                        Debug.Log("I don't think you got this one today, and that's ok.");
-                        Debug.Log("But brace yourself. I know you don't like to lose");
-                        sc.WaitThenLoad("Boss Battle", 1f);
+                        dh.DisplayBattleText("Somethings coming. ",1f);
+                        dh.DisplayBattleText("I don't think you got this one today, and that's ok. ");
+                        dh.DisplayBattleText("But brace yourself. I know you don't like to lose. ");
+                        sc.WaitThenLoad("Boss Battle", 7f);
                     }
                     doOnce = true;
                 }
@@ -100,6 +107,20 @@ public class BattleHandler : MonoBehaviour
             }
 
         }
+    }
+
+    void ShowGoal()
+    {
+        goalAnim.gameObject.SetActive(true);
+        if(desiredBP >0)
+        {
+            goalTxt.text = "MAKE THAT BOND!\nMake it go up!";
+        }
+        else
+        {
+            goalTxt.text = "BREAK THE BOND!\nMake it go down!";
+        }
+        goalAnim.SetBool("canStart", true);
     }
 
     bool CheckIfItsOver()

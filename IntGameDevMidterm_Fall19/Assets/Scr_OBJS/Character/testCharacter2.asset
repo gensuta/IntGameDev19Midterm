@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93a1a0fa9bb84ea28e6ac109a059f95, type: 3}
   m_Name: testCharacter2
   m_EditorClassIdentifier: 
-  _name: kindy
+  isDefeated: 0
+  _name: lively
   maxBp: 10
   currentBp: 0
   _type: 2

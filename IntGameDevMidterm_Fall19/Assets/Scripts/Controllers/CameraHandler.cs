@@ -18,11 +18,10 @@ public class CameraHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //anim = GetComponent<Animator>();
-
         if (isBattleCamera)
         {
             bh = FindObjectOfType<BattleHandler>();
+            anim = GetComponent<Animator>();
         }
         else
         {
@@ -33,11 +32,7 @@ public class CameraHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isBattleCamera)
-        {
-            transform.LookAt(target);
-        }
-        else // hallway camera
+        if(!isBattleCamera) // hallway camera
         {
             //transform.LookAt(target);
             newPos = target.position + offset;
@@ -49,6 +44,12 @@ public class CameraHandler : MonoBehaviour
             newPos += moveVector;
             transform.position = newPos;
         }
+    }
+
+    public void ChangeCamAnim(int which)   //0 idle/playerTurn 1 still/enemyTurn 2 personaChange 3 persona menu
+    {
+        anim.SetInteger("whichAnim", which);
+        //anim.Play(0);
     }
 
 }

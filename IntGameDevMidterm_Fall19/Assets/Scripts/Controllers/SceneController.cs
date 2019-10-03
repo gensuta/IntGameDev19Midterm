@@ -52,6 +52,10 @@ public class SceneController : MonoBehaviour
             {
                 ResetScene();
             }
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                LoadScene("Hallway"); // go to "beginning" scene
+            }
         }
 
 
@@ -112,6 +116,13 @@ public class SceneController : MonoBehaviour
     {
         th.PlayAnim(transition);
         timerIsOn = true; 
+        timer = time;
+        storedName = sName;
+    }
+    public void WaitThenTransitionAndLoad(string sName, float time, int transition = 0)
+    {
+        th.PlayDelayedAnim(transition,time - 0.5f);
+        timerIsOn = true;
         timer = time;
         storedName = sName;
     }

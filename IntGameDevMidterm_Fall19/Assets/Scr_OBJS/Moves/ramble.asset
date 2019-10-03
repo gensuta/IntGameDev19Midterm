@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: ramble
   doesDmg: 1
-  amount: 8
-  moveType: 2
-  moveCost: 7
+  amount: 5
+  moveType: 1
+  moveCost: 6

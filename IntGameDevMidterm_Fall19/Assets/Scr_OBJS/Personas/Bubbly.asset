@@ -19,5 +19,5 @@ MonoBehaviour:
   moves:
   - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
   - {fileID: 11400000, guid: e26ce65bf79bb4cecb452abbdc0582fe, type: 2}
-  - {fileID: 11400000, guid: 3946cddc7d43a45409f05c8e4bd367af, type: 2}
+  - {fileID: 11400000, guid: ab1168c6ea50747c3b79f7d23a2a5396, type: 2}
   animControl: {fileID: 0}

@@ -33,6 +33,8 @@ public class DialogueHandler : MonoBehaviour
 
     AudioController ac;
     SceneController sc;
+    float timer;
+    bool isCountingDown;
 
     public int whichVoice;
 
@@ -46,31 +48,44 @@ public class DialogueHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isActive && Input.GetKeyDown(KeyCode.Space))
+
+        if(isCountingDown)
         {
-            if (already)
+            timer -= Time.deltaTime;
+            if(timer <= 0)
             {
-                if (!isTyping) // if no text is typing go to next line OR disable textbox
-                {
-                    currentLine += 1;
-                    if (currentLine >= myLines.Count )
-                    {
-                        DisableTextBox();
-                    }
-                    else
-                    {
-                        StartCoroutine(Textscroll(myLines[currentLine]));
-                    }
-                }
-                else if (isTyping && !cancelTyping) // cancel typing!
-                {
-                    cancelTyping = true;
-                    already = false;
-                }
+                DisableTextBox();
+                isCountingDown = false;
             }
-            else
+        }
+        if (!isBattleMode)
+        {
+            if (isActive && Input.GetKeyDown(KeyCode.Space))
             {
-                already = true; // you pressed space already
+                if (already)
+                {
+                    if (!isTyping) // if no text is typing go to next line OR disable textbox
+                    {
+                        currentLine += 1;
+                        if (currentLine >= myLines.Count)
+                        {
+                            DisableTextBox();
+                        }
+                        else
+                        {
+                            StartCoroutine(Textscroll(myLines[currentLine]));
+                        }
+                    }
+                    else if (isTyping && !cancelTyping) // cancel typing!
+                    {
+                        cancelTyping = true;
+                        already = false;
+                    }
+                }
+                else
+                {
+                    already = true; // you pressed space already
+                }
             }
         }
     }
@@ -87,15 +102,32 @@ public class DialogueHandler : MonoBehaviour
 
         while (isTyping && !cancelTyping && (letter < _text.text.Length - 1))
         {
-            ac.PlayVoiceClip(ac.voiceClips[whichVoice]);
+            if (!isBattleMode)
+            {
+                ac.PlayVoiceClip(ac.voiceClips[whichVoice]);
+            }
             letter += 1;
             _text.maxVisibleCharacters = letter;
             yield return new WaitForSeconds(textSpeed);
         }
 
-        _text.maxVisibleCharacters = _text.text.Length - 1;
+        _text.maxVisibleCharacters = _text.text.Length;
         isTyping = false;
         cancelTyping = false;
+    }
+
+    public void DisplayBattleText(string _text, float amt = 2.5f)
+    {
+        textHolder.SetActive(true);
+        isActive = true;
+        BeginWaitingTime(amt);
+        StartCoroutine(Textscroll(_text));
+    }
+
+    void BeginWaitingTime(float amt)
+    {
+        timer = amt;
+        isCountingDown = true;
     }
 
     public void EnableTextBox()
@@ -111,6 +143,7 @@ public class DialogueHandler : MonoBehaviour
         isActive = false;
         textHolder.SetActive(false);
         _text.text = "";
+
         if (!isBattleMode)
         {
             sc.WaitThenLoad("Battle", 1f, 1);

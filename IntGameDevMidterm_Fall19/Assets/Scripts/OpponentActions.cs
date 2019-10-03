@@ -9,6 +9,9 @@ public class OpponentActions : MonoBehaviour
     BattleHandler bh;
     PlayerActions player;
 
+    float storedBp;
+    public float lerpSpeed = 0.25f; // for slider
+
     [Space]
     [Header("UI mess")]
     public TextMeshProUGUI bpTxt;
@@ -20,6 +23,9 @@ public class OpponentActions : MonoBehaviour
     {
         bh = FindObjectOfType<BattleHandler>();
         player = FindObjectOfType<PlayerActions>();
+
+
+        storedBp = bh.opponent.currentBp;
         bpSlider.maxValue = 20;
         nameTxt.text = bh.opponent._name;
 
@@ -33,20 +39,21 @@ public class OpponentActions : MonoBehaviour
 
 	void UpdateUI()
 	{
-		bpTxt.text = "Bond Points: " + bh.opponent.currentBp;
-		bpSlider.value = bh.opponent.currentBp;
+        storedBp = Mathf.Lerp(storedBp, bh.opponent.currentBp, lerpSpeed * Time.deltaTime);
+        bpTxt.text = "Bond Points: " + bh.opponent.currentBp;
+		bpSlider.value = storedBp;
 	}
 
     public void ChooseRandomMove()
     {
         int rand = Random.Range(0, bh.opponent.moves.Length);
         bh.opponent.moves[rand].UseMoveOnPlayer(player);
-        Debug.Log(bh.opponent._name + " used " + bh.opponent.moves[rand]._name + " on the player!");
+        bh.dh.DisplayBattleText(bh.opponent._name + " used " + bh.opponent.moves[rand]._name + " on the player!");
         bh.player.BeginPlayerTurn();
     }
     public void BeQuirky()
     {
-        Debug.Log("The opponent does something quirky but it has no effect");
+        bh.dh.DisplayBattleText("The opponent does something quirky but it means nothing to you. ");
         bh.player.BeginPlayerTurn();
     }
 }
