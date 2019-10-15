@@ -25,6 +25,7 @@ public class CameraHandler : MonoBehaviour
         }
         else
         {
+            transform.position = GameController.gc.cameraLastPos;
             offset = transform.position - target.position;
         }
     }
@@ -40,7 +41,7 @@ public class CameraHandler : MonoBehaviour
             //newPos.z = transform.position.z;
 
             Vector3 moveVector = transform.position - newPos;
-            moveVector *= 0.75f; //75% of the way there
+            moveVector *= 0.5f; //75% of the way there
             newPos += moveVector;
             transform.position = newPos;
         }

@@ -36,7 +36,7 @@ public class BattleHandler : MonoBehaviour
     [TextArea(2, 5)]
     public string[] tutWords;
     public int tracker;
-
+    public bool actionChosen;
 
     // Start is called before the first frame update
     void Awake()
@@ -80,15 +80,22 @@ public class BattleHandler : MonoBehaviour
                     }
                     else
                     {
-                        int randAction = 0;
-                        randAction = Random.Range(0, 6);
-                        if(randAction > 2)
+                        if (!actionChosen)
                         {
-                            oa.ChooseRandomMove();
-                        }
-                        else
-                        {
-                            oa.BeQuirky();
+                            int randAction = 0;
+                            randAction = Random.Range(0, 10);
+
+                            if (randAction > 2)
+                            {
+                                Debug.Log("hm");
+                                oa.ChooseRandomMove();
+                            }
+                            else
+                            {
+                                Debug.Log("fuck");
+                                oa.BeQuirky();
+                            }
+                            actionChosen = true;
                         }
                     }
                 }
@@ -101,7 +108,7 @@ public class BattleHandler : MonoBehaviour
                     {
                         //gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
-                        dh.DisplayBattleText("Battle over!\n You didn't break down yet! :D ");
+                        dh.DisplayBattleText("Battle over!\nYou didn't break down yet! :D ");
                         sc.WaitThenTransitionAndLoad("Hallway", 3f, 2);
                         doOnce = true;
                     }

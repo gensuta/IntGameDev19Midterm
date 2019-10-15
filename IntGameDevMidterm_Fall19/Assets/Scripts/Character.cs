@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "Character", menuName = "Objects/Characters", order = 0)]
 public class Character : ScriptableObject
 {
+    public bool hasShownDefeatedLines;
     public bool isDefeated;
     public string _name;
 

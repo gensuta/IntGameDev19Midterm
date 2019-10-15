@@ -30,6 +30,7 @@ public class DialogueHandler : MonoBehaviour
     bool cancelTyping = false;
     public bool isActive;// are things showing?
     public bool already; // did you press space already?
+    public bool isShowingDefeat;
 
     AudioController ac;
     SceneController sc;
@@ -144,12 +145,16 @@ public class DialogueHandler : MonoBehaviour
         textHolder.SetActive(false);
         _text.text = "";
 
-        if (!isBattleMode)
+        if (!isBattleMode && !isShowingDefeat)
         {
             sc.WaitThenLoad("Battle", 1f, 1);
             //to ensure the label is off during the transition
             label.SetActive(false);
             FindObjectOfType<PlayerMovement>().GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            isShowingDefeat = false;
         }
 
     }

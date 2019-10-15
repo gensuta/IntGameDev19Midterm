@@ -15,21 +15,23 @@ public class PlayerMovement : MonoBehaviour
     DialogueHandler dh;
     GameController gc;
 
-    bool nearObj;
+    public bool nearObj;
     public bool canJump = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        canJump = true;
         rb = GetComponent<Rigidbody>();
         dh = FindObjectOfType<DialogueHandler>();
         gc = FindObjectOfType<GameController>();
+
+       transform.position = gc.playerLastPos;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         rotateDir = DirConstraints(Input.GetAxis("Horizontal"));
         movementDir = DirConstraints(Input.GetAxis("Vertical"));
     }
@@ -94,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if(collision.gameObject.tag == ("Ground") && !nearObj)
         {
@@ -106,15 +108,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<InteractBehavior>() != null && !dh.isActive)
         {
-            nearObj = true;
             InteractBehavior interact = collision.gameObject.GetComponent<InteractBehavior>();
-            dh.label.SetActive(true);
-            dh.labelText.text = interact._name;
-            canJump = false;
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (!interact.character.isDefeated)
             {
-                StartConversation(interact);
+                nearObj = true;
+                dh.label.SetActive(true);
+                dh.labelText.text = interact._name;
+                
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    StartConversation(interact);
 
+                }
+            }
+            else
+            {
+                nearObj = false;
+                canJump = false;
             }
         }
     }
@@ -153,7 +163,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         dh.EnableTextBox();
-
+        gc.cameraLastPos = Camera.main.transform.position;
+        gc.playerLastPos = transform.position;
         //dc.CheckWhosTalking(dc.myLines[dc.currentLine]);
         //dc.textHolder.SetActive(true);
         //dc._text.text = dc.myLines[dc.currentLine];

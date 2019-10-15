@@ -17,3 +17,6 @@ MonoBehaviour:
   amount: 6
   moveType: 1
   moveCost: 3
+  dialogue:
+  - fuckin uhhhhh
+  - goddammit...

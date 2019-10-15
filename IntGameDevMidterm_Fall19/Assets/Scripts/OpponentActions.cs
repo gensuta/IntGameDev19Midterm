@@ -18,6 +18,9 @@ public class OpponentActions : MonoBehaviour
     public TextMeshProUGUI nameTxt;
     public Slider bpSlider;
 
+    bool madeMove;
+    int rand;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +38,14 @@ public class OpponentActions : MonoBehaviour
     void Update()
     {
         UpdateUI();
+
+        if(madeMove && !bh.dh.isActive)
+        {
+            bh.dh.DisplayBattleText(bh.opponent._name + " used " + bh.opponent.moves[rand]._name + " on the player!");
+            bh.player.BeginPlayerTurn();
+            madeMove = false;
+
+        }
     }
 
 	void UpdateUI()
@@ -42,14 +53,27 @@ public class OpponentActions : MonoBehaviour
         storedBp = Mathf.Lerp(storedBp, bh.opponent.currentBp, lerpSpeed * Time.deltaTime);
         bpTxt.text = "Bond Points: " + bh.opponent.currentBp;
 		bpSlider.value = storedBp;
+        ClampStuff();
 	}
+
+    void ClampStuff()
+    {
+        if (bh.opponent.currentBp > 20)
+        {
+            bh.opponent.currentBp = 20;
+        }
+        if (bh.opponent.currentBp < 0)
+        {
+            bh.opponent.currentBp = 0;
+        }
+
+    }
 
     public void ChooseRandomMove()
     {
-        int rand = Random.Range(0, bh.opponent.moves.Length);
-        bh.opponent.moves[rand].UseMoveOnPlayer(player);
-        bh.dh.DisplayBattleText(bh.opponent._name + " used " + bh.opponent.moves[rand]._name + " on the player!");
-        bh.player.BeginPlayerTurn();
+        rand = Random.Range(0, bh.opponent.moves.Length);
+        bh.dh.DisplayBattleText(bh.opponent.moves[rand].GetRandomDialogue());
+        madeMove = true; 
     }
     public void BeQuirky()
     {

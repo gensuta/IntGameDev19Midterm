@@ -36,7 +36,8 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     public GameObject personaHolder;
 
     bool waitForText;
-
+    bool madeMove;
+    Moves storedMove;
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +73,26 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     {
         UpdateUI();
 
-        if(waitForText)
+
+        if(bp > 20)
+        {
+            bp = 20;
+        }
+        else if (bp < 0)
+        {
+            bp = 0;
+        }
+
+        if (mp > 20)
+        {
+            mp = 20;
+        }
+        else if (mp < 0)
+        {
+            mp = 0;
+        }
+
+        if (waitForText)
         {
             if(!dh.isActive)
             {
@@ -87,6 +107,12 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
             {
                 BackToMainMenu();
             }
+        }
+
+        if(madeMove && !dh.isActive)
+        {
+            dh.DisplayBattleText("You used " + storedMove._name + " on " + bh.opponent._name);
+            EndPlayerTurn();
         }
     }
 
@@ -209,11 +235,13 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     public void SelectMove(int whichMove)
     { 
         Moves currentMove = myPersonas[currentPersona].moves[whichMove];
+        storedMove = currentMove;
         if (currentMove.amount < mp)
         {
+            ShowOrHideActions(false);
             currentMove.UseMove(bh.opponent, this);
-            dh.DisplayBattleText("You used " + currentMove._name + " on " + bh.opponent._name);
-            EndPlayerTurn();
+            dh.DisplayBattleText(currentMove.GetRandomDialogue());
+            madeMove = true;
         }
         else
         {
@@ -246,12 +274,12 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
     public void EndPlayerTurn()
     {
+        madeMove = false;
         ch.ChangeCamAnim(1);
         bh.actionTimer = 1.5f;
         bh.isPlayerTurn = false;
+        bh.actionChosen = false;
         BackToMainMenu();
-        ShowOrHideActions(false);
-       
     }
 
     void ShowOrHideActions(bool isShow) // false hide true show

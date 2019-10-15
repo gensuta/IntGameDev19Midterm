@@ -17,3 +17,14 @@ MonoBehaviour:
   amount: 4
   moveType: 0
   moveCost: 2
+  dialogue:
+  - Hey <b>gurll</b> you're looking mighty finneee
+  - ur so cute
+  - lol wow so cool
+  - omg mad respect for my kween
+  - lmaoaoaoaoao ur so funny
+  - wowoowow so amazing!
+  - um wow talk about outstanding
+  - ur like soooo fantastic
+  - uwah! wowie! im honored to b in ur prescence
+  - wow look at this bad dialogue.

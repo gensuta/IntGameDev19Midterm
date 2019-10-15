@@ -17,3 +17,5 @@ MonoBehaviour:
   amount: 4
   moveType: 1
   moveCost: 2
+  dialogue:
+  - ouch

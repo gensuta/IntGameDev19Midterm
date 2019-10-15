@@ -14,6 +14,16 @@ public class Moves : ScriptableObject
 
     public int moveCost;
 
+    [TextArea(2,8)]
+    public string[] dialogue;
+
+
+    public string GetRandomDialogue()
+    {
+        int randNum;
+        randNum = Random.Range(0, dialogue.Length);
+        return dialogue[randNum];
+    }
 
     public void UseMove(Character target, PlayerActions player)
     {
