@@ -40,7 +40,7 @@ public class InteractBehavior : MonoBehaviour
                 }
                 else
                 {
-                    StartConversation(this);
+                    StartConversation(this,gc.playerLost);
                     dialogueStarted = true;
                 }
             }
@@ -48,7 +48,7 @@ public class InteractBehavior : MonoBehaviour
         }
     }
 
-    public void StartConversation(InteractBehavior interact)
+    public void StartConversation(InteractBehavior interact, bool playerLost)
     {
         dh.nameTxt.text = interact.character._name;
         gc.storedChar = Instantiate(interact.character); // this is so we never DIRECTLY edit the object in the folder during the battle
@@ -68,9 +68,21 @@ public class InteractBehavior : MonoBehaviour
         dh.currentLine = 0;
         dh.label.SetActive(false);
         dh.myLines.Clear();
-        foreach (string line in interact.character.defeatLines)
+        if (!playerLost)
         {
-            dh.myLines.Add(line);
+            foreach (string line in interact.character.defeatLines)
+            {
+                dh.myLines.Add(line);
+
+            }
+        }
+        else
+        {
+            foreach (string line in interact.character.winLines)
+            {
+                dh.myLines.Add(line);
+
+            }
         }
 
         dh.isShowingDefeat = true;

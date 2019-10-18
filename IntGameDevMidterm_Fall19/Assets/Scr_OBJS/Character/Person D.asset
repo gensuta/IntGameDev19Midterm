@@ -15,16 +15,26 @@ MonoBehaviour:
   hasShownDefeatedLines: 0
   isDefeated: 0
   _name: A cool person
-  maxBp: 10
+  maxBp: 30
   currentBp: 0
-  _type: 2
+  _type: 0
   willBreakBond: 0
   bondWanted: 1
   exploreLines:
-  - heyyy!
-  - what's going on?
-  - wanna chat for a bit?
-  defeatLines: []
+  - Oh hello!
+  - Glad to see you're here!
+  defeatLines:
+  - Haha I'm glad to see you're all good and well!
+  - See you around!
+  winLines:
+  - 'Hey, it''s ok. '
+  - It's pretty crowded and noisy in here so I get being anxious.
+  - Stay safe and make sure to take care of yourself ok?
+  myModel: {fileID: -927199367670048503, guid: 64fc31c8354ac4ba88c5b150f6a65242, type: 3}
+  myAnim: {fileID: 0}
   moves:
   - {fileID: 11400000, guid: e26ce65bf79bb4cecb452abbdc0582fe, type: 2}
+  - {fileID: 11400000, guid: bf3693cf3b14d4de5953a3277d4aee36, type: 2}
   - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
+  - {fileID: 11400000, guid: 1fb7e63d0bd164aa38cad12735d81361, type: 2}
+  - {fileID: 11400000, guid: 9f8aaae1628f54b8c9bfad54534adf7d, type: 2}

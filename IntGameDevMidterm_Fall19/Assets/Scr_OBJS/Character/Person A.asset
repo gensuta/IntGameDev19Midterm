@@ -12,20 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93a1a0fa9bb84ea28e6ac109a059f95, type: 3}
   m_Name: Person A
   m_EditorClassIdentifier: Assembly-CSharp::Character
-  hasShownDefeatedLines: 1
-  isDefeated: 1
+  hasShownDefeatedLines: 0
+  isDefeated: 0
   _name: A new friend
-  maxBp: 10
-  currentBp: 10
+  maxBp: 15
+  currentBp: 0
   _type: 0
   willBreakBond: 0
   bondWanted: 1
   exploreLines:
-  - Heyyy
-  - testingggg
+  - Omg...
+  - Is that a Gengar charm?
   defeatLines:
-  - oh noooo
-  - fammmmm
+  - Hey, it was nice talking to you!
+  - 'Maybe we can get coffee or something next week C:'
+  winLines:
+  - '[Awkward silence]'
+  - Well! It was nice meeting you!
+  myModel: {fileID: -927199367670048503, guid: 2c4512ff1dddf46208762af6467c895c, type: 3}
+  myAnim: {fileID: 0}
   moves:
-  - {fileID: 11400000, guid: 9e4396fd203694c45ad40fe579e5c77c, type: 2}
-  - {fileID: 11400000, guid: ab1168c6ea50747c3b79f7d23a2a5396, type: 2}
+  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
+  - {fileID: 11400000, guid: 8467ebbe97ea943ea9d7211d0f3d10a6, type: 2}
+  - {fileID: 11400000, guid: bf3693cf3b14d4de5953a3277d4aee36, type: 2}
+  customRotation: {x: -90, y: -90, z: 0}

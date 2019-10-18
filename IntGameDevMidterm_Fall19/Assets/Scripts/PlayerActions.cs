@@ -39,6 +39,9 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     bool madeMove;
     Moves storedMove;
 
+    public Vector3 personaPos;
+    public GameObject currentPersonaObj;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +68,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         storedBp = bp;
         storedMp = mp;
 
+        currentPersonaObj = myPersonas[currentPersona].SpawnMe(personaPos,this);
       //  ShowPersonaFX();
     }
 
@@ -111,7 +115,16 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
         if(madeMove && !dh.isActive)
         {
-            dh.DisplayBattleText("You used " + storedMove._name + " on " + bh.opponent._name);
+            ShowOrHideActions(false);
+            if (storedMove.onSelf)
+            {
+                dh.DisplayBattleText("You used " + storedMove._name + "!");
+            }
+            else
+            {
+                dh.DisplayBattleText("You used " + storedMove._name + " on " + bh.opponent._name);
+            }
+            
             EndPlayerTurn();
         }
     }
@@ -183,7 +196,10 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         }
         else
         {
+            ac.PlaySFX(ac.battleNoises[2]);
+            Destroy(currentPersonaObj);
             currentPersona = whichPersona;
+            currentPersonaObj = myPersonas[whichPersona].SpawnMe(personaPos,this);
             dh.DisplayBattleText("You're new persona is <color=red>" + myPersonas[currentPersona]._name + "</color>");
             EndPlayerTurn();
         }
@@ -195,6 +211,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         if(mp < 20)
         {
             mp += Random.Range(3, 7);
+            ShowOrHideActions(false);
             EndPlayerTurn();
         }
         else
@@ -211,6 +228,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
             if(bp < 20)
             {
                 bp += Random.Range(1, 5);
+                ShowOrHideActions(false);
                 EndPlayerTurn();
             }
             else
@@ -223,6 +241,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
             if (bp > 0)
             {
                 bp -= Random.Range(1, 5);
+                ShowOrHideActions(false);
                 EndPlayerTurn();
             }
             else
@@ -245,7 +264,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         }
         else
         {
-            dh.DisplayBattleText("Hey, maybe you need to zone out for a bit");
+            dh.DisplayBattleText("Hey, don't forget to <i>breathe</i>!");
         }
     }
 

@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Bubbly
   m_EditorClassIdentifier: 
   _name: Bubbly
-  neutralPose: {fileID: 0}
   ps: {fileID: 0}
+  neutralPose: {fileID: 0}
+  myModel: {fileID: -927199367670048503, guid: ad4362e54740b46b6a63880fb14fd3ba, type: 3}
+  customRotation: {x: -90, y: -90, z: 0}
   _type: 2
   moves:
-  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
+  - {fileID: 11400000, guid: 9cd957ac64e234aadb59047e16a97c71, type: 2}
+  - {fileID: 11400000, guid: 1fb7e63d0bd164aa38cad12735d81361, type: 2}
   - {fileID: 11400000, guid: e26ce65bf79bb4cecb452abbdc0582fe, type: 2}
-  - {fileID: 11400000, guid: ab1168c6ea50747c3b79f7d23a2a5396, type: 2}
   animControl: {fileID: 0}

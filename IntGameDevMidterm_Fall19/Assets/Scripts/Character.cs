@@ -21,12 +21,30 @@ public class Character : ScriptableObject
 
     public bool bondWanted; // do 'you' want to keep this bond?
 
-    [TextArea (5,8)]
+    [TextArea(5, 8)]
     public List<string> exploreLines;//lines seen when you first meet them
 
     [TextArea(5, 8)]
     public List<string> defeatLines;//lines seen when you 'defeat' them
 
+
+    [TextArea(5, 8)]
+    public List<string> winLines;//lines seen when you 'defeat' them
+
+    public GameObject myModel; // for instantiating battle models
+
+    public RuntimeAnimatorController myAnim;
+
     public Moves[] moves;
 
+    public Vector3 customRotation;
+
+    public void SpawnMe(Vector3 pos)
+    {
+        GameObject g = Instantiate(myModel, pos, Quaternion.identity);
+        g.transform.rotation = Quaternion.Euler(customRotation);
+    } 
+
 }
+
+

@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
 
     SceneController sc;
     TransitionHandler th;
-    AudioController ac;
+    public AudioController ac;
 
     public static GameController gc;
 	public bool isFirstBattle;
@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
 
     public Vector3 playerLastPos; //moves player to this pos at the beginning
     public Vector3 cameraLastPos;
+
+    public bool playerLost;
 
     // Start is called before the first frame update
     void Awake()

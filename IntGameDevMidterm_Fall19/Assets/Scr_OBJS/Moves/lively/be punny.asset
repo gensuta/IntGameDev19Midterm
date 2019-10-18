@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5999c2d582bda4c92b7a59b4f23c9b14, type: 3}
+  m_Name: be punny
+  m_EditorClassIdentifier: 
+  _name: be punny
+  doesDmg: 1
+  amount: 5
+  onSelf: 0
+  moveType: 2
+  moveCost: 3
+  dialogue:
+  - Last night, I dreamed I was swimming in an ocean of orange soda. But it was just
+    a Fanta sea
+  - Y'know, I went to buy some camouflage trousers yesterday but couldn't find any.
+  - Hey, don't trust atoms, they make up everything.
+  - I'm reading a book about anti-gravity. It's impossible to put down.
+  - R.I.P boiled water. You will be mist.
+  - I used to be addicted to the hokey pokey... but thankfully, I turned myself around.
+  - Hey, not all math puns are terrible. Just sum.
+  - I keep getting lost in the Apple store because there aren't any Windows.
+  - A storm blew away only 25 % of my roof last night. Oof
+  - My math teacher called me average. How mean!

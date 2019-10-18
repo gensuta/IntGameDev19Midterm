@@ -59,6 +59,7 @@ public class DialogueHandler : MonoBehaviour
                 isCountingDown = false;
             }
         }
+
         if (!isBattleMode)
         {
             if (isActive && Input.GetKeyDown(KeyCode.Space))
@@ -86,6 +87,18 @@ public class DialogueHandler : MonoBehaviour
                 else
                 {
                     already = true; // you pressed space already
+                }
+            }
+        }
+        else
+        {
+            if (isActive && Input.GetKeyDown(KeyCode.Space))
+            {
+                if (isTyping && !cancelTyping)
+                {
+                    cancelTyping = true;
+                    already = false;
+                    timer = 0.2f;
                 }
             }
         }
@@ -117,7 +130,7 @@ public class DialogueHandler : MonoBehaviour
         cancelTyping = false;
     }
 
-    public void DisplayBattleText(string _text, float amt = 2.5f)
+    public void DisplayBattleText(string _text, float amt = 3.5f)
     {
         textHolder.SetActive(true);
         isActive = true;

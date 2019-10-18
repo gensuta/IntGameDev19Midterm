@@ -109,22 +109,32 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.GetComponent<InteractBehavior>() != null && !dh.isActive)
         {
             InteractBehavior interact = collision.gameObject.GetComponent<InteractBehavior>();
-            if (!interact.character.isDefeated)
-            {
-                nearObj = true;
-                dh.label.SetActive(true);
-                dh.labelText.text = interact._name;
-                
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    StartConversation(interact);
 
-                }
+            if (interact.character._name == "RAW")
+            {
+                StartConversation(interact);
+                nearObj = false;
+                canJump = false;
             }
             else
             {
-                nearObj = false;
-                canJump = false;
+                if (!interact.character.isDefeated)
+                {
+                    nearObj = true;
+                    dh.label.SetActive(true);
+                    dh.labelText.text = interact._name;
+
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        StartConversation(interact);
+
+                    }
+                }
+                else
+                {
+                    nearObj = false;
+                    canJump = false;
+                }
             }
         }
     }

@@ -14,17 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasShownDefeatedLines: 0
   isDefeated: 0
-  _name: An old pal
-  maxBp: 10
-  currentBp: 0
+  _name: r3d4ct3d
+  maxBp: 20
+  currentBp: 20
   _type: 2
   willBreakBond: 0
-  bondWanted: 1
+  bondWanted: 0
   exploreLines:
-  - heyyy!
-  - what's going on?
-  - wanna chat for a bit?
-  defeatLines: []
+  - Yo!
+  - How've you been?
+  - Wanna chat for a bit?
+  defeatLines:
+  - Please don't do this.
+  - I said I was sorry!
+  winLines:
+  - I said I was sorry and I meant it.
+  - But if you don't wanna be friends anymore...
+  - 'That''s on you. '
+  myModel: {fileID: -927199367670048503, guid: 64baa42fc3e8547b1b96e511900275c9, type: 3}
+  myAnim: {fileID: 0}
   moves:
-  - {fileID: 11400000, guid: e26ce65bf79bb4cecb452abbdc0582fe, type: 2}
-  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
+  - {fileID: 11400000, guid: 89f4588e6af96479cb504b292976e2dc, type: 2}
+  - {fileID: 11400000, guid: 1fb7e63d0bd164aa38cad12735d81361, type: 2}
+  - {fileID: 11400000, guid: 00aa5a5a9fb524560823f1bc15f255b9, type: 2}
+  customRotation: {x: -90, y: 90, z: 0}

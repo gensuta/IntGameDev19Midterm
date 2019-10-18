@@ -12,20 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93a1a0fa9bb84ea28e6ac109a059f95, type: 3}
   m_Name: Person B
   m_EditorClassIdentifier: 
-  hasShownDefeatedLines: 1
-  isDefeated: 1
+  hasShownDefeatedLines: 0
+  isDefeated: 0
   _name: '[redacted]'
-  maxBp: 10
+  maxBp: 20
   currentBp: 0
-  _type: 2
-  willBreakBond: 0
+  _type: 1
+  willBreakBond: 1
   bondWanted: 1
   exploreLines:
-  - heyyy!
-  - what's going on?
-  - wanna chat for a bit?
+  - Hi.
+  - You wanted to talk?
   defeatLines:
-  - ouch.
+  - Why do you keep coming back?
+  - You know your just hurting yourself in the end.
+  - And it won't be my fault this time.
+  winLines:
+  - Whatever, I'm going home.
+  - See you I guess.
+  myModel: {fileID: -927199367670048503, guid: e895205b392a24e9aa962c19fdb7800c, type: 3}
+  myAnim: {fileID: 0}
   moves:
-  - {fileID: 11400000, guid: e26ce65bf79bb4cecb452abbdc0582fe, type: 2}
-  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
+  - {fileID: 11400000, guid: be0d297e2036f4ba88585d6369418309, type: 2}
+  - {fileID: 11400000, guid: ab1168c6ea50747c3b79f7d23a2a5396, type: 2}
+  - {fileID: 11400000, guid: be0d297e2036f4ba88585d6369418309, type: 2}
+  customRotation: {x: -90, y: -90, z: 0}

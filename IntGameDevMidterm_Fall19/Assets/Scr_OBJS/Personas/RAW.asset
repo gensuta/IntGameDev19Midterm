@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: RAW
   m_EditorClassIdentifier: 
   _name: RAW
-  neutralPose: {fileID: 0}
   ps: {fileID: 0}
+  neutralPose: {fileID: 0}
+  myModel: {fileID: -927199367670048503, guid: 9eff62b403a25441b87307f9e742b6b7, type: 3}
+  customRotation: {x: 0, y: 90, z: 0}
   _type: 1
   moves:
   - {fileID: 11400000, guid: 1146ca1883bb048f89b1fb0fb444bdb8, type: 2}
-  - {fileID: 11400000, guid: 4bbb8de1deb8249de909055d6298c612, type: 2}
+  - {fileID: 11400000, guid: d8b4e3db817a042b7b14fdde014e3f5a, type: 2}
   - {fileID: 11400000, guid: 9e4396fd203694c45ad40fe579e5c77c, type: 2}
   animControl: {fileID: 0}

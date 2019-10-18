@@ -11,6 +11,7 @@ public class AudioController : MonoBehaviour
     [Space]
     public bool fadingIn;
     public AudioClip[] voiceClips; // 0 tired, 1 kind, 2 lively
+    public AudioClip[] battleNoises; // 0 bondUP, 1 bondDown, 2pChange, 3win, 4lose
 
     // Start is called before the first frame update
     void Start()
@@ -62,8 +63,9 @@ public class AudioController : MonoBehaviour
         fadingIn = true;
     }
 
-    public void PlaySFX(AudioClip clip, float vol = 1f)
+    public void PlaySFX(AudioClip clip, float vol = 0.5f)
     {
+        sfxAud.volume = vol;
         sfxAud.clip = clip;
         sfxAud.Play();
     }
@@ -84,7 +86,7 @@ public class AudioController : MonoBehaviour
 
         }
         //it gotta be a battle scene lol
-        else
+        else if (sc.GetSceneName() != "EndScene")
         {
             PlayerActions player = FindObjectOfType<PlayerActions>();
             sfxAud = player.GetComponent<AudioSource>();

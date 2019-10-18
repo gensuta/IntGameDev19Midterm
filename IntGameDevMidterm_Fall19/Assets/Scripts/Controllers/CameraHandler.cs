@@ -27,6 +27,7 @@ public class CameraHandler : MonoBehaviour
         {
             transform.position = GameController.gc.cameraLastPos;
             offset = transform.position - target.position;
+            //distance for movement should have a minimum so that the camera only moves if the distance is far
         }
     }
 

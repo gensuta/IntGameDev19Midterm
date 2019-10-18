@@ -8,8 +8,11 @@ public class Personas : ScriptableObject
 {
     public string _name;
 
+    public GameObject ps; //particle system
+
     public Sprite neutralPose;
-    public GameObject ps;
+    public GameObject myModel;
+    public Vector3 customRotation;
 
     public GameController.Types _type; // is this character lively, tired, or kind?
 
@@ -24,5 +27,14 @@ public class Personas : ScriptableObject
     public void SetAnimator(Animator anim)
     {
         anim.runtimeAnimatorController = animControl;
+    }
+
+    public GameObject SpawnMe(Vector3 pos, PlayerActions player)
+    {
+
+        GameObject g = Instantiate(myModel, pos, Quaternion.identity);
+        g.transform.parent = player.transform;
+        g.transform.rotation = Quaternion.Euler(customRotation);
+        return g;
     }
 }

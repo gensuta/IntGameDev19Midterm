@@ -7,12 +7,15 @@ public class Moves : ScriptableObject
 {
     public string _name;
 
-    public bool doesDmg; // 
+    public bool doesDmg; // bp up or bp down?
     public int amount; // amt of dmg or healing
+
+    public int moveCost;
+
+    public bool onSelf;
 
     public GameController.Types moveType;
 
-    public int moveCost;
 
     [TextArea(2,8)]
     public string[] dialogue;
@@ -29,13 +32,14 @@ public class Moves : ScriptableObject
     {
 		if (doesDmg)
 		{
-
+            GameController.gc.ac.PlaySFX(GameController.gc.ac.battleNoises[1]);
 			target.currentBp -= DetermineTrueAmount(moveType, target._type, amount);
 
 		}
 		else
 		{
-			target.currentBp += DetermineTrueAmount(moveType, target._type, amount);
+            GameController.gc.ac.PlaySFX(GameController.gc.ac.battleNoises[0]);
+            target.currentBp += DetermineTrueAmount(moveType, target._type, amount);
 		}
         player.mp -= moveCost;
     }
@@ -44,15 +48,17 @@ public class Moves : ScriptableObject
     {
         GameController.Types playerType = target.myPersonas[target.currentPersona]._type;
 
-		if (doesDmg)
-		{
 
-			target.bp -= DetermineTrueAmount(moveType, playerType, amount);
+        if (doesDmg)
+		{
+            GameController.gc.ac.PlaySFX(GameController.gc.ac.battleNoises[1]);
+            target.bp -= DetermineTrueAmount(moveType, playerType, amount);
 
 		}
 		else
 		{
-			target.bp += DetermineTrueAmount(moveType, playerType, amount);
+            GameController.gc.ac.PlaySFX(GameController.gc.ac.battleNoises[0]);
+            target.bp += DetermineTrueAmount(moveType, playerType, amount);
 		}
     }
 

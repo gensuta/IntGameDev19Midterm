@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5999c2d582bda4c92b7a59b4f23c9b14, type: 3}
+  m_Name: compliment
+  m_EditorClassIdentifier: 
+  _name: compliment
+  doesDmg: 0
+  amount: 4
+  onSelf: 0
+  moveType: 0
+  moveCost: 4
+  dialogue:
+  - Your art is so cute!!
+  - Omg I love ur hair!!
+  - I mean, your just really cool
+  - I have mad respect for you fam!
+  - Ah those buttons are so pretty!
+  - That thing you did last neat was pretty rad

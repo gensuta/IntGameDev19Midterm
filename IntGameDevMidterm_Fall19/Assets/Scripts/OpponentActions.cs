@@ -41,7 +41,14 @@ public class OpponentActions : MonoBehaviour
 
         if(madeMove && !bh.dh.isActive)
         {
-            bh.dh.DisplayBattleText(bh.opponent._name + " used " + bh.opponent.moves[rand]._name + " on the player!");
+            if (!bh.opponent.moves[rand].onSelf)
+            {
+                bh.dh.DisplayBattleText(bh.opponent._name + " used " + bh.opponent.moves[rand]._name + " on the player!");
+            }
+            else
+            {
+                bh.dh.DisplayBattleText(bh.opponent._name + " used " + bh.opponent.moves[rand]._name + "!");
+            }
             bh.player.BeginPlayerTurn();
             madeMove = false;
 
@@ -72,6 +79,7 @@ public class OpponentActions : MonoBehaviour
     public void ChooseRandomMove()
     {
         rand = Random.Range(0, bh.opponent.moves.Length);
+        bh.opponent.moves[rand].UseMoveOnPlayer(player);
         bh.dh.DisplayBattleText(bh.opponent.moves[rand].GetRandomDialogue());
         madeMove = true; 
     }

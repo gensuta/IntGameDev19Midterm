@@ -14,17 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasShownDefeatedLines: 0
   isDefeated: 0
-  _name: lively
-  maxBp: 10
+  _name: RAW
+  maxBp: 40
   currentBp: 0
-  _type: 2
-  willBreakBond: 0
+  _type: 1
+  willBreakBond: 1
   bondWanted: 1
   exploreLines:
   - heyyy!
   - what's going on?
   - wanna chat for a bit?
   defeatLines: []
+  winLines: []
+  myModel: {fileID: -927199367670048503, guid: 9eff62b403a25441b87307f9e742b6b7, type: 3}
+  myAnim: {fileID: 0}
   moves:
   - {fileID: 11400000, guid: e26ce65bf79bb4cecb452abbdc0582fe, type: 2}
+  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
   - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}

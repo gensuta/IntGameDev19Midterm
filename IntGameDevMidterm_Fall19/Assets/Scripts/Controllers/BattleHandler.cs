@@ -38,9 +38,12 @@ public class BattleHandler : MonoBehaviour
     public int tracker;
     public bool actionChosen;
 
+    public Vector3 spawnPos;
+
     // Start is called before the first frame update
     void Awake()
     {
+        
         tracker = 0;
         dh = FindObjectOfType<DialogueHandler>();
         player = FindObjectOfType<PlayerActions>();
@@ -49,11 +52,14 @@ public class BattleHandler : MonoBehaviour
         ac = FindObjectOfType<AudioController>();
         sc = FindObjectOfType<SceneController>();
 
+        gc.playerLost = false;
         opponent = gc.storedChar;
         DetermineEndConditions();
         isPlayerTurn = true;
         opponentBP = opponent.currentBp;
         playerBP = player.bp;
+
+        opponent.SpawnMe(spawnPos);
 
         if(!gc.isFirstBattle)
         {
@@ -87,12 +93,10 @@ public class BattleHandler : MonoBehaviour
 
                             if (randAction > 2)
                             {
-                                Debug.Log("hm");
                                 oa.ChooseRandomMove();
                             }
                             else
                             {
-                                Debug.Log("fuck");
                                 oa.BeQuirky();
                             }
                             actionChosen = true;
@@ -106,28 +110,33 @@ public class BattleHandler : MonoBehaviour
                 {
                     if (didWin)
                     {
+                        ac.PlaySFX(gc.ac.battleNoises[3]);
                         //gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         dh.DisplayBattleText("Battle over!\nYou didn't break down yet! :D ");
-                        sc.WaitThenTransitionAndLoad("Hallway", 3f, 2);
-                        doOnce = true;
+                        if (opponent._name == "A cool person")
+                        {
+                            sc.WaitThenTransitionAndLoad("EndScene", 3f, 2);
+                            doOnce = true;
+                        }
+                        else
+                        {
+                            sc.WaitThenTransitionAndLoad("Hallway", 3f, 2);
+                            doOnce = true;
+                        }
+
                     }
                     else
                     {
-                        if (!dh.isActive)
-                        {
-                            if (tracker < loseWords.Length)
-                            {
-                                dh.DisplayBattleText(loseWords[tracker]);
-                                tracker++;
-                            }
-                            else
-                            {
-                                sc.WaitThenLoad("Boss Battle", 1.5f,2);
-                            }
-                        }
+                        ac.PlaySFX(gc.ac.battleNoises[4]);
+                        gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
+                        gc.playerLost = true;
+                        dh.DisplayBattleText("Battle over!\n...You're highkey panicking.");
+                        sc.WaitThenTransitionAndLoad("Hallway", 3f, 2);
+                        doOnce = true;
                     }
-                    
+
+
                 }
                
             }
@@ -167,11 +176,11 @@ public class BattleHandler : MonoBehaviour
 
         if (unwantedBP > 0)
         {
-            goalTxt.text += "\nBut don't let them make a bond with you...";
+            goalTxt.text += "\nBut don't let them get your BP to 20 first!";
         }
         else
         {
-            goalTxt.text += "\nBut don't let them break the bond they have with you...";
+            goalTxt.text += "\nBut don't let them get your BP to 0 first!";
         }
         goalAnim.SetBool("canStart", true);
     }
