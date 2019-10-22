@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: vibe check
   m_EditorClassIdentifier: 
   _name: Vibe Check
-  doesDmg: 1
+  doesDmg: 0
   amount: 5
   moveCost: 0
   onSelf: 0

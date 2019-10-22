@@ -12,6 +12,7 @@ public class InteractBehavior : MonoBehaviour
     float waitTime = 0.5f; // allow dialogue handler to find the CORRECT audio
     bool dialogueStarted;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class InteractBehavior : MonoBehaviour
 
         if (gc.CheckIfGone(_name))
         {
-            Destroy(gameObject);
+            Destroy(gameObject,1.5f);
         }
     }
 
@@ -36,7 +37,8 @@ public class InteractBehavior : MonoBehaviour
             {
                 if (dialogueStarted)
                 {
-                    Destroy(gameObject);
+                    transform.position += new Vector3(0f,-0.15f,0f);
+                    Destroy(gameObject,1.5f);
                 }
                 else
                 {

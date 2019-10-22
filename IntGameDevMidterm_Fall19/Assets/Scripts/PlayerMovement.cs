@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed;
-    public float rotateSpeed;
-    public float jumpSpeed;
     Rigidbody rb;
-
-    float rotateDir;
-    float movementDir;
-
     DialogueHandler dh;
     GameController gc;
 
+
+    [Space]
+    [Header("Player Nums")]
+    public float moveSpeed;
+    public float fallMultiplier = 2.5f;
+    public float jumpMultiplier = 2f;
+    public float jumpSpeed;
+
+
+
+    int hDir;
+    int vDir;
+
     public bool nearObj;
-    public bool canJump = true;
+    public bool canJump;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +38,17 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rotateDir = DirConstraints(Input.GetAxis("Horizontal"));
-        movementDir = DirConstraints(Input.GetAxis("Vertical"));
+        hDir = DirConstraints(Input.GetAxis("Horizontal"));
+        vDir = DirConstraints(Input.GetAxis("Vertical"));
+
+        if (!dh.isActive)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && canJump)
+            {
+                Jump(Vector2.up);
+                canJump = false;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -41,43 +56,30 @@ public class PlayerMovement : MonoBehaviour
 
         if (!dh.isActive)
         {
-            if (Input.GetButton("Horizontal")) // rotate with left/right or ad
-            {
-                transform.Rotate(0, rotateSpeed * rotateDir, 0);
-                if (canJump)
-                {
-                    rb.drag = 1;
-                }
-            }
-
-            if (Input.GetButton("Vertical")) // move with up/down or ws
-            {
-                rb.AddForce(transform.forward * moveSpeed * movementDir, ForceMode.Force);
-                if (canJump)
-                {
-                    rb.drag = 1;
-                }
-            }
-            if (Input.GetButtonUp(("Horizontal")))
-            {
-                rb.drag = 5;
-            }
-            if (Input.GetButtonUp(("Vertical")))
-            {
-                rb.drag = 5;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space) && canJump) // jump
-            {
-                rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
-                canJump = false;
-            }
+            Vector3 dir = new Vector3(hDir, 0, vDir);
+            Walk(dir);
         }
-        if (!canJump && rb.velocity.y> 1.5f)
+
+        if (rb.velocity.y < 0)
         {
-            rb.velocity += Vector3.up * Physics2D.gravity.y * (jumpSpeed - 1) * Time.deltaTime;
+            rb.velocity += Vector3.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
+            rb.velocity += Vector3.up * Physics2D.gravity.y * (jumpMultiplier - 1) * Time.deltaTime;
         }
 
+    }
+
+    public void Walk(Vector3 dir) 
+    {
+        rb.velocity = new Vector3(dir.x * moveSpeed, rb.velocity.y, dir.z * moveSpeed);
+    }
+
+    public void Jump(Vector3 dir)
+    {
+        rb.velocity = new Vector3(rb.velocity.x, 0,rb.velocity.z);
+        rb.velocity += dir * jumpSpeed;
     }
 
     int DirConstraints(float dir)

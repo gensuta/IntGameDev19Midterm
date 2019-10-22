@@ -38,3 +38,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
   - {fileID: 11400000, guid: 1fb7e63d0bd164aa38cad12735d81361, type: 2}
   - {fileID: 11400000, guid: 9f8aaae1628f54b8c9bfad54534adf7d, type: 2}
+  customRotation: {x: -90, y: 0, z: 0}

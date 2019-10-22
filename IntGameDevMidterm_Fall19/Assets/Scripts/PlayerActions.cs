@@ -165,7 +165,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         }
         else
         {
-            dh.DisplayBattleText("Hey, don't forget to <i>breathe</i>.");
+            dh.DisplayBattleText("Hey, don't forget to <i>breathe</i>. Your MP is low.");
         }
     }
 

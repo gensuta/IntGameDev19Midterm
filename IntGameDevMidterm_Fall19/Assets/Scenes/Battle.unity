@@ -6138,7 +6138,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 1
-  m_Color: {r: 0.3679245, g: 0.13189124, b: 0.057271272, a: 1}
+  m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -9914,7 +9914,7 @@ MonoBehaviour:
   - But that doesn't matter now!! It's battle time!!!
   tracker: 0
   actionChosen: 0
-  spawnPos: {x: 3.2, y: 2.2, z: -3.3}
+  spawnPos: {x: 3.2, y: 0, z: -3.3}
 --- !u!4 &1675629545
 Transform:
   m_ObjectHideFlags: 0

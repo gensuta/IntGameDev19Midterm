@@ -15,13 +15,13 @@ MonoBehaviour:
   _name: compliment
   doesDmg: 0
   amount: 4
+  moveCost: 4
   onSelf: 0
   moveType: 0
-  moveCost: 4
   dialogue:
   - Your art is so cute!!
   - Omg I love ur hair!!
   - I mean, your just really cool
   - I have mad respect for you fam!
   - Ah those buttons are so pretty!
-  - That thing you did last neat was pretty rad
+  - That thing you did last night was pretty rad

@@ -15,6 +15,9 @@ public class CameraHandler : MonoBehaviour
     Vector3 newPos;
     Animator anim;
 
+    Vector3 vel = Vector3.zero;
+    public float dampTime = 0.15f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,15 +39,24 @@ public class CameraHandler : MonoBehaviour
     {
         if(!isBattleCamera) // hallway camera
         {
+           
             //transform.LookAt(target);
             newPos = target.position + offset;
-            newPos.y = transform.position.y;
+
+            if (Mathf.Abs(target.position.y - transform.position.y) > 3f)
+            {
+                newPos.y = target.position.y;
+            }
+            
             //newPos.z = transform.position.z;
 
             Vector3 moveVector = transform.position - newPos;
-            moveVector *= 0.5f; //75% of the way there
+            moveVector *= 0.25f; //75% of the way there
             newPos += moveVector;
-            transform.position = newPos;
+            //transform.position = newPos;
+
+
+            transform.position = Vector3.SmoothDamp(transform.position, newPos,ref vel, dampTime);
         }
     }
 

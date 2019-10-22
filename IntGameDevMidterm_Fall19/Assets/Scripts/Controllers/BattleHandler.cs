@@ -114,7 +114,7 @@ public class BattleHandler : MonoBehaviour
                         //gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         dh.DisplayBattleText("Battle over!\nYou didn't break down yet! :D ");
-                        if (opponent._name == "A cool person")
+                        if (opponent._name == "RAW")
                         {
                             sc.WaitThenTransitionAndLoad("EndScene", 3f, 2);
                             doOnce = true;
