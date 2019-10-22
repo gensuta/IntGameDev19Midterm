@@ -33,8 +33,7 @@ public class BattleHandler : MonoBehaviour
 
     [TextArea(2,5)]
     public string[] loseWords;
-    [TextArea(2, 5)]
-    public string[] tutWords;
+
     public int tracker;
     public bool actionChosen;
 
@@ -61,7 +60,7 @@ public class BattleHandler : MonoBehaviour
 
         opponent.SpawnMe(spawnPos);
 
-        if(!gc.isFirstBattle)
+        if(!gc.isTutMode)
         {
             ShowGoal();
         }
@@ -74,35 +73,43 @@ public class BattleHandler : MonoBehaviour
         opponentBP = opponent.currentBp;
         playerBP = player.bp;
 
-        if (!gc.isFirstBattle) //PLEASE REMEMBER TO SET THIS VAR TO TRUE AT THE BEG OF THE GAME!
+        if (!gc.isTutMode) //PLEASE REMEMBER TO SET THIS VAR TO TRUE AT THE BEG OF THE GAME!
         {
             if (!CheckIfItsOver())
             {
                 if (!isPlayerTurn)
                 {
-                    if(actionTimer > 0)
+                    if (gc.tutTracker > 6)
                     {
-                        actionTimer -= Time.deltaTime;
+                        if (actionTimer > 0)
+                        {
+                            actionTimer -= Time.deltaTime;
+                        }
+                        else
+                        {
+                            if (!actionChosen)
+                            {
+                                int randAction = 0;
+                                randAction = Random.Range(0, 10);
+
+                                if (randAction > 2)
+                                {
+                                    oa.ChooseRandomMove();
+                                }
+                                else
+                                {
+                                    oa.BeQuirky();
+                                }
+                                actionChosen = true;
+                            }
+                        }
                     }
                     else
                     {
-                        if (!actionChosen)
-                        {
-                            int randAction = 0;
-                            randAction = Random.Range(0, 10);
-
-                            if (randAction > 2)
-                            {
-                                oa.ChooseRandomMove();
-                            }
-                            else
-                            {
-                                oa.BeQuirky();
-                            }
-                            actionChosen = true;
-                        }
+                        gc.isTutMode = true;
                     }
                 }
+                
             }
             else
             {
@@ -131,6 +138,7 @@ public class BattleHandler : MonoBehaviour
                         ac.PlaySFX(gc.ac.battleNoises[4]);
                         gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         gc.playerLost = true;
+                        player.playerHolder.SetActive(true);
                         dh.DisplayBattleText("Battle over!\n...You're highkey panicking.");
                         sc.WaitThenTransitionAndLoad("Hallway", 3f, 2);
                         doOnce = true;
@@ -138,25 +146,7 @@ public class BattleHandler : MonoBehaviour
 
 
                 }
-               
-            }
-        }
-        else
-        {
-            Debug.Log(tutWords.Length);
-            if (!dh.isActive)
-            {
-                if (tracker < tutWords.Length)
-                {
-                    dh.DisplayBattleText(tutWords[tracker]);
-                    tracker++;
-                }
-                else
-                {
-                    tracker = 0;
-                    gc.isFirstBattle = false;
-                    ShowGoal();
-                }
+
             }
         }
     }

@@ -10,7 +10,8 @@ public class GameController : MonoBehaviour
     public AudioController ac;
 
     public static GameController gc;
-	public bool isFirstBattle;
+    public bool isTutMode;
+    public int tutTracker;
 
     public Character storedChar;
 
@@ -21,6 +22,8 @@ public class GameController : MonoBehaviour
     public Vector3 cameraLastPos;
 
     public bool playerLost;
+
+    public Personas lastUsed;
 
     // Start is called before the first frame update
     void Awake()

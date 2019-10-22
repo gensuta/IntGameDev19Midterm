@@ -34,6 +34,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     public GameObject actionHolder;
     public GameObject moveHolder;
     public GameObject personaHolder;
+    public GameObject playerHolder;
 
     bool waitForText;
     bool madeMove;
@@ -42,7 +43,28 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     public Vector3 personaPos;
     public GameObject currentPersonaObj;
 
+
     // Start is called before the first frame update
+    void Awake()
+    {
+        if (GameController.gc.lastUsed == null)
+        {
+            GameController.gc.lastUsed = myPersonas[0];
+        }
+        else
+        {
+           int i = 0;
+           foreach(Personas p in myPersonas)
+            {
+                if(GameController.gc.lastUsed._name == p._name)
+                {
+                    currentPersona = i;
+                }
+                i++;
+            }
+        }
+    }
+
     void Start()
     {
         dh = FindObjectOfType<DialogueHandler>();
@@ -115,7 +137,6 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
         if(madeMove && !dh.isActive)
         {
-            ShowOrHideActions(false);
             if (storedMove.onSelf)
             {
                 dh.DisplayBattleText("You used " + storedMove._name + "!");
@@ -153,7 +174,6 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     {
         if (mp > 0)
         {
-            backButton.SetActive(true);
             actionHolder.SetActive(false);
             moveHolder.SetActive(true);
             int whichMove = 0;
@@ -165,6 +185,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         }
         else
         {
+            backButton.SetActive(false);
             dh.DisplayBattleText("Hey, don't forget to <i>breathe</i>. Your MP is low.");
         }
     }
@@ -192,10 +213,12 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     {
         if(whichPersona == currentPersona)
         {
+            backButton.SetActive(false);
             dh.DisplayBattleText("Silly! You have that persona equipped already!");
         }
         else
         {
+            backButton.SetActive(false);
             ac.PlaySFX(ac.battleNoises[2]);
             Destroy(currentPersonaObj);
             currentPersona = whichPersona;
@@ -210,8 +233,11 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     {
         if(mp < 20)
         {
-            mp += Random.Range(3, 7);
-            ShowOrHideActions(false);
+            int randNum = Random.Range(3, 7);
+            mp += randNum;
+            dh.DisplayBattleText("Breathing restored " + randNum + " MP!");
+
+            playerHolder.SetActive(false);
             EndPlayerTurn();
         }
         else
@@ -227,8 +253,11 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         {
             if(bp < 20)
             {
-                bp += Random.Range(1, 5);
-                ShowOrHideActions(false);
+                int randNum = Random.Range(1, 5);
+                bp += randNum;
+                dh.DisplayBattleText("Listening restored " + randNum + " BP!");
+
+                playerHolder.SetActive(false);
                 EndPlayerTurn();
             }
             else
@@ -240,7 +269,10 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         {
             if (bp > 0)
             {
-                bp -= Random.Range(1, 5);
+                int randNum = Random.Range(1, 5);
+                bp -= randNum;
+                dh.DisplayBattleText("Listening took away " + randNum + " BP!");
+
                 ShowOrHideActions(false);
                 EndPlayerTurn();
             }
@@ -257,7 +289,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         storedMove = currentMove;
         if (currentMove.amount < mp)
         {
-            ShowOrHideActions(false);
+            playerHolder.SetActive(false);
             currentMove.UseMove(bh.opponent, this);
             dh.DisplayBattleText(currentMove.GetRandomDialogue());
             madeMove = true;
@@ -286,6 +318,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         {
             waitForText = true;
         }
+        playerHolder.SetActive(true);
         ShowOrHideActions(true);
         bh.isPlayerTurn = true;
 
@@ -293,6 +326,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
     public void EndPlayerTurn()
     {
+        playerHolder.SetActive(false);
         madeMove = false;
         ch.ChangeCamAnim(1);
         bh.actionTimer = 1.5f;
@@ -304,10 +338,6 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     void ShowOrHideActions(bool isShow) // false hide true show
     {
         actionHolder.SetActive(isShow);
-        //foreach (Button button in actionHolder.GetComponentsInChildren<Button>())
-        //{
-        //    button.gameObject.SetActive(isShow);
-        //}
     }
 
 
