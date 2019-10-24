@@ -15,20 +15,38 @@ MonoBehaviour:
   hasShownDefeatedLines: 0
   isDefeated: 0
   _name: RAW
-  maxBp: 40
+  maxBp: 45
   currentBp: 0
   _type: 1
   willBreakBond: 1
   bondWanted: 1
   exploreLines:
-  - heyyy!
-  - what's going on?
-  - wanna chat for a bit?
-  defeatLines: []
-  winLines: []
+  - YOU'VE FINALLY MADE IT.
+  - I'VE BEEN WAITING FOR YOU TO FACE ME. SINCE YOU IGNORE ME WHEN I'M AROUND
+  - WHAT DO YOU CALL ME NOWADAYS...
+  - YOU'RE SCARY THOUGHTS? RIGHT? BECAUSE OF THE WAY I PERCEIVE THE WORLD?
+  - I'LL SHOW YOU SCARY!!!
+  defeatLines:
+  - '...WHY DO YOU WANT TO BEFRIEND ME?'
+  - I UNDERSTAND WE ARE STUCK TOGETHER. BUT I HATE YOU. UNDERSTAND?!
+  - IF YOU...
+  - If you could express yourself without controlling everything you do or say.
+  - Maybe you'll be able to find your true persona.
+  - '...And maybe I won''t hate you so much.'
+  - Sorry. Let's talk with indoor voices next time eh?
+  winLines:
+  - WELL WELL WELL!!!
+  - IT WOULD APPEAR I AM THE VICTOR! AND MOST LIKELY YOUR TRUE PERSONA!
+  - 'THE ONLY EMOTION TO NOT BE SILENCED EVER! '
+  - YOU CAN'T FIGHT ME! AND YOU CAN'T FIGHT THE TRUTH!
+  - TO EXIST IS SUFFERING. TO TRY AND COPE WITH EXISTING IS EXHAUSTING
+  - MY FLAMES OF FURY CANNOT BE PUT OUT. SO...
+  - '...Just sit here and let it out...'
+  - '...Maybe we''ll be okay soon...'
   myModel: {fileID: -927199367670048503, guid: 9eff62b403a25441b87307f9e742b6b7, type: 3}
   myAnim: {fileID: 0}
   moves:
-  - {fileID: 11400000, guid: e26ce65bf79bb4cecb452abbdc0582fe, type: 2}
-  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
-  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
+  - {fileID: 11400000, guid: 408000ef6bf834818a4075a48c312ae9, type: 2}
+  - {fileID: 11400000, guid: 1e3d095471a85424399157d9d838fb69, type: 2}
+  - {fileID: 11400000, guid: c25dc3a924d524ab1b3ed0b3d4ed9633, type: 2}
+  customRotation: {x: 0, y: 0, z: 0}

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5999c2d582bda4c92b7a59b4f23c9b14, type: 3}
+  m_Name: bubb
+  m_EditorClassIdentifier: 
+  _name: '"random meme"'
+  doesDmg: 1
+  amount: 3
+  moveCost: 2
+  onSelf: 0
+  moveType: 2
+  dialogue:
+  - tfw sad boi hours
+  - '*fortnite dances to escape sad boi hours*'
+  - 'serotonin? spare serotonin? '
+  - i'm meming so hard ppl can't tell when i'm serious anymore :)
+  - what if we had a panic attack rn...haha jk...unless?
+  - haha don't have imposter syndrome you're so sexy

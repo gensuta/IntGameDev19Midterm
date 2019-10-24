@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: cheer on!!!
   doesDmg: 0
-  amount: 3
+  amount: 2
+  moveCost: 4
   onSelf: 0
   moveType: 0
-  moveCost: 3
   dialogue:
   - You got this!!!
   - I believe in you!!!

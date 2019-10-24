@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: hand gesture
   doesDmg: 0
-  amount: 5
+  amount: 3
+  moveCost: 7
   onSelf: 0
   moveType: 2
-  moveCost: 6
   dialogue:
   - '*fist bump*'
   - '*finger guns*'

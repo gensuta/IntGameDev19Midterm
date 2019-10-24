@@ -70,7 +70,6 @@ public class Moves : ScriptableObject
         {
             if(type2 == GameController.Types.tiredness)
             {
-                Debug.Log("SUPER EFFECTIVE!");
                 trueAmt *= 2;
             }
         }
@@ -78,7 +77,6 @@ public class Moves : ScriptableObject
         {
             if (type2 == GameController.Types.kindness)
             {
-                Debug.Log("SUPER EFFECTIVE!");
                 trueAmt *= 2;
             }
         }
@@ -86,7 +84,6 @@ public class Moves : ScriptableObject
         {
             if (type2 == GameController.Types.liveliness) // no matter how upbeat u r 
             {
-                Debug.Log("SUPER EFFECTIVE!");
                 trueAmt *= 2;
             }
         }

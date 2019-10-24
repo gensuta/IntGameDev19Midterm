@@ -15,9 +15,9 @@ MonoBehaviour:
   _name: random meme
   doesDmg: 1
   amount: 3
+  moveCost: 2
   onSelf: 0
   moveType: 2
-  moveCost: 3
   dialogue:
   - on god?
   - '*fortnite dances*'

@@ -12,6 +12,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     DialogueHandler dh;
 
     public Personas[] myPersonas;
+    public Moves[] myMoves;
     public int currentPersona;
 
     float storedBp;
@@ -34,6 +35,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     public GameObject actionHolder;
     public GameObject moveHolder;
     public GameObject personaHolder;
+    public GameObject personaButton;
     public GameObject playerHolder;
 
     bool waitForText;
@@ -89,9 +91,11 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
         storedBp = bp;
         storedMp = mp;
-
-        currentPersonaObj = myPersonas[currentPersona].SpawnMe(personaPos,this);
-      //  ShowPersonaFX();
+        if (bh.opponent._name == "Bubbly" && bh.opponent._name == "Shy" && bh.opponent._name == "RAW")
+        {
+            currentPersonaObj = myPersonas[currentPersona].SpawnMe(personaPos, this);
+            ShowPersonaFX();
+        }
     }
 
     // Update is called once per frame
@@ -152,11 +156,8 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
     void ShowPersonaFX()
     {
-        if(GameObject.FindWithTag("fx") != null)
-        {
-            Destroy(GameObject.FindWithTag("fx"));
-        }
-        Instantiate(myPersonas[currentPersona].ps);
+        Vector3 psPos = new Vector3(-1.19f, 0, -8.27f);
+        Instantiate(myPersonas[currentPersona].ps,psPos,transform.rotation,currentPersonaObj.transform);
     }
 
     void UpdateUI()
@@ -179,8 +180,16 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
             int whichMove = 0;
             foreach (Button button in moveHolder.GetComponentsInChildren<Button>())
             {
-                button.GetComponentInChildren<TextMeshProUGUI>().text = myPersonas[currentPersona].moves[whichMove]._name;
-                whichMove++;
+                if (bh.opponent._name != "A new friend" && bh.opponent._name != "A cool person")
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = myPersonas[currentPersona].moves[whichMove]._name;
+                    whichMove++;
+                }
+                else
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = myMoves[whichMove]._name;
+                    whichMove++;
+                }
             }
         }
         else
@@ -204,6 +213,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         {
             button.GetComponentInChildren<TextMeshProUGUI>().text = myPersonas[whichP]._name;
             whichP++;
+
         }
     }
 
@@ -218,15 +228,37 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         }
         else
         {
-            backButton.SetActive(false);
-            ac.PlaySFX(ac.battleNoises[2]);
-            Destroy(currentPersonaObj);
-            currentPersona = whichPersona;
-            currentPersonaObj = myPersonas[whichPersona].SpawnMe(personaPos,this);
-            dh.DisplayBattleText("You're new persona is <color=red>" + myPersonas[currentPersona]._name + "</color>");
-            EndPlayerTurn();
+            if (bh.opponent._name != "A new friend" && bh.opponent._name != "A cool person")
+            {
+                ChangeForReal(whichPersona);
+            }
+            else
+            {
+                if(myPersonas[whichPersona].name == "RAW")
+                {
+                    backButton.SetActive(false);
+                    dh.DisplayBattleText("They CAN NOT interact with this one.");
+                }
+            }
+           
         }
 
+    }
+
+
+    void ChangeForReal(int whichPersona)
+    {
+        backButton.SetActive(false);
+        ac.PlaySFX(ac.battleNoises[2]);
+        ac.FadeOut();
+        Destroy(currentPersonaObj);
+        currentPersona = whichPersona;
+        currentPersonaObj = myPersonas[whichPersona].SpawnMe(personaPos, this);
+
+        GameController.gc.lastUsed = myPersonas[currentPersona];
+        dh.DisplayBattleText("You're new persona is <color=red>" + myPersonas[currentPersona]._name + "</color>");
+        ShowPersonaFX();
+        EndPlayerTurn();
     }
 
     public void Breathe() // restore mp
@@ -249,11 +281,16 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
     public void Stare() // restore bp
     {
+        if(GameController.gc.tutTracker == 4)
+        {
+            GameController.gc.tutTracker = 5;
+        }
+
         if(bh.unwantedBP == 0)
         {
             if(bp < 20)
             {
-                int randNum = Random.Range(1, 5);
+                int randNum = Random.Range(3, 6);
                 bp += randNum;
                 dh.DisplayBattleText("Listening restored " + randNum + " BP!");
 
@@ -284,8 +321,19 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     }
 
     public void SelectMove(int whichMove)
-    { 
-        Moves currentMove = myPersonas[currentPersona].moves[whichMove];
+    {
+
+        Moves currentMove;
+
+        if (bh.opponent._name != "A new friend" && bh.opponent._name != "A cool person")
+        {
+            currentMove = myPersonas[currentPersona].moves[whichMove];
+        }
+        else
+        {
+            currentMove = myMoves[whichMove];
+        }
+
         storedMove = currentMove;
         if (currentMove.amount < mp)
         {

@@ -15,19 +15,31 @@ MonoBehaviour:
   hasShownDefeatedLines: 0
   isDefeated: 0
   _name: Bubbly
-  maxBp: 20
+  maxBp: 35
   currentBp: 0
   _type: 2
   willBreakBond: 1
   bondWanted: 1
   exploreLines:
-  - heyyy!
-  - what's going on?
-  - wanna chat for a bit?
-  defeatLines: []
-  winLines: []
+  - hehe did u kno?
+  - that "i'm baby" meme is us
+  - that's all we are
+  - lol wow i sure love imposter syndrome making us like this :)
+  - we just like. don't know anything and don't know how to human right?
+  defeatLines:
+  - ok. Maybe we aren't baby.
+  - Maybe we're a functional responsible adult?
+  - Maybe not. lol.
+  - Thanks for listening tho.
+  winLines:
+  - wut did i tell you lmao
+  - you can't even fight me
+  - you can't even fight
+  - goodluck with the others
+  - RAW is ready to tear everything a part
   myModel: {fileID: -927199367670048503, guid: ad4362e54740b46b6a63880fb14fd3ba, type: 3}
   myAnim: {fileID: 0}
   moves:
-  - {fileID: 11400000, guid: e26ce65bf79bb4cecb452abbdc0582fe, type: 2}
-  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
+  - {fileID: 11400000, guid: 5e56fe3c87b474eba9e14c1fa64bd270, type: 2}
+  - {fileID: 11400000, guid: d610c0423005e4aea801650317197523, type: 2}
+  customRotation: {x: -90, y: 0, z: 0}

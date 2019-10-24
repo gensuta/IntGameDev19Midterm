@@ -15,9 +15,9 @@ MonoBehaviour:
   _name: mumble
   doesDmg: 1
   amount: 6
+  moveCost: 3
   onSelf: 0
   moveType: 1
-  moveCost: 3
   dialogue:
   - fuckin uhhhhh
-  - goddammit...
+  - '[inaudible]'

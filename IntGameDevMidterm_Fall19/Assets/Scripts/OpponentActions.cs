@@ -12,11 +12,14 @@ public class OpponentActions : MonoBehaviour
     float storedBp;
     public float lerpSpeed = 0.25f; // for slider
 
+    public Sprite[] types; // 0 rock kind, 1 tired scissors, 2 paper lively
+
     [Space]
     [Header("UI mess")]
     public TextMeshProUGUI bpTxt;
     public TextMeshProUGUI nameTxt;
     public Slider bpSlider;
+    public Image type;
 
     bool madeMove;
     int rand;
@@ -25,12 +28,25 @@ public class OpponentActions : MonoBehaviour
     void Start()
     {
         bh = FindObjectOfType<BattleHandler>();
+        if (bh.opponent._type == GameController.Types.kindness)
+        {
+            type.sprite = types[0];
+        }
+        else if (bh.opponent._type == GameController.Types.tiredness)
+        {
+            type.sprite = types[1];
+        }
+        else if (bh.opponent._type == GameController.Types.liveliness)
+        {
+            type.sprite = types[2];
+        }
+
         player = FindObjectOfType<PlayerActions>();
 
 
         storedBp = bh.opponent.currentBp;
         bpSlider.maxValue = 20;
-        nameTxt.text = bh.opponent._name;
+        nameTxt.text = bh.opponent._name;   
 
     }
 

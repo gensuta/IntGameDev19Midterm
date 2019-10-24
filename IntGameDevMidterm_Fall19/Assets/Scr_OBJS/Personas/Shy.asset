@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shy
   m_EditorClassIdentifier: 
   _name: Shy
-  ps: {fileID: 0}
+  ps: {fileID: 5737490777282502706, guid: 72fdd30ca435246c490f506cb931554e, type: 3}
   neutralPose: {fileID: 0}
   myModel: {fileID: -927199367670048503, guid: b8d285b833bac4bc4b84c174c38bfb5d, type: 3}
   customRotation: {x: -90, y: 90, z: 0}

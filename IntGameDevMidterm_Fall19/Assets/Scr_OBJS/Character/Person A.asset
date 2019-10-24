@@ -15,8 +15,8 @@ MonoBehaviour:
   hasShownDefeatedLines: 0
   isDefeated: 0
   _name: A new friend
-  maxBp: 15
-  currentBp: 0
+  maxBp: 20
+  currentBp: 5
   _type: 0
   willBreakBond: 0
   bondWanted: 1

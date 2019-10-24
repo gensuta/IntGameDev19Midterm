@@ -64,6 +64,8 @@ public class BattleHandler : MonoBehaviour
         {
             ShowGoal();
         }
+
+        ac.BeginBattleMusic();
         
     }
 
@@ -79,7 +81,7 @@ public class BattleHandler : MonoBehaviour
             {
                 if (!isPlayerTurn)
                 {
-                    if (gc.tutTracker > 6)
+                    if (gc.tutTracker == 2 || gc.tutTracker > 5)
                     {
                         if (actionTimer > 0)
                         {
@@ -89,24 +91,67 @@ public class BattleHandler : MonoBehaviour
                         {
                             if (!actionChosen)
                             {
-                                int randAction = 0;
-                                randAction = Random.Range(0, 10);
-
-                                if (randAction > 2)
+                                if (gc.tutTracker == 2)
                                 {
                                     oa.ChooseRandomMove();
+                                   
                                 }
                                 else
                                 {
-                                    oa.BeQuirky();
+                                    int randAction = 0;
+                                    randAction = Random.Range(0, 12);
+
+                                    if (randAction > 2)
+                                    {
+                                        oa.ChooseRandomMove();
+                                    }
+                                    else
+                                    {
+                                        oa.BeQuirky();
+                                    }
                                 }
+                                gc.tutTracker++;
                                 actionChosen = true;
                             }
                         }
                     }
                     else
                     {
+                        if (!actionChosen)
+                        {
+                            if (gc.tutTracker < 4)
+                            {
+                                gc.tutTracker++;
+                            }
+                            else if (gc.tutTracker == 5)
+                            {
+                                TutorialHandler tutC = FindObjectOfType<TutorialHandler>();
+                                tutC.BeginText(tutC.tutWords[4].lines);
+                                isPlayerTurn = true;
+                                gc.isTutMode = true;
+                            }
+                            else
+                            {
+                                TutorialHandler tutC = FindObjectOfType<TutorialHandler>();
+                                tutC.wordTracker = -1;
+                                tutC.BeginText(tutC.tutWords[gc.tutTracker].lines);
+                                isPlayerTurn = true;
+                                gc.isTutMode = true;
+                            }
+                            
+                        }
+                    }
+                }
+                else
+                {
+                    if(gc.tutTracker == 3)
+                    {
+                        TutorialHandler tutC = FindObjectOfType<TutorialHandler>();
+                        tutC.wordTracker = -1;
+                        tutC.BeginText(tutC.tutWords[gc.tutTracker].lines);
+                        isPlayerTurn = true;
                         gc.isTutMode = true;
+                        gc.tutTracker++;
                     }
                 }
                 
@@ -118,19 +163,12 @@ public class BattleHandler : MonoBehaviour
                     if (didWin)
                     {
                         ac.PlaySFX(gc.ac.battleNoises[3]);
-                        //gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         dh.DisplayBattleText("Battle over!\nYou didn't break down yet! :D ");
-                        if (opponent._name == "RAW")
-                        {
-                            sc.WaitThenTransitionAndLoad("EndScene", 3f, 2);
-                            doOnce = true;
-                        }
-                        else
-                        {
-                            sc.WaitThenTransitionAndLoad("Hallway", 3f, 2);
-                            doOnce = true;
-                        }
+
+                        ac.SwitchSong(ac.hallwayMusic);
+                        sc.WaitThenTransitionAndLoad("Hallway", 3f, 2);
+                        doOnce = true;
 
                     }
                     else

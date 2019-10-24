@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InteractBehavior : MonoBehaviour
 {
+    SceneController sc;
     DialogueHandler dh;
     GameController gc;
     public Character character;
@@ -16,6 +17,7 @@ public class InteractBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sc = FindObjectOfType<SceneController>();
         dh = FindObjectOfType<DialogueHandler>();
         gc = FindObjectOfType<GameController>();
         _name = character._name;
@@ -37,8 +39,15 @@ public class InteractBehavior : MonoBehaviour
             {
                 if (dialogueStarted)
                 {
-                    transform.position += new Vector3(0f,-0.15f,0f);
-                    Destroy(gameObject,1.5f);
+                    if (_name == "RAW")
+                    {
+                        sc.WaitThenLoad("EndScene", 0.75f);
+                    }
+                    else
+                    {
+                        transform.position += new Vector3(0f, -0.15f, 0f);
+                        Destroy(gameObject, 1.5f);
+                    }
                 }
                 else
                 {

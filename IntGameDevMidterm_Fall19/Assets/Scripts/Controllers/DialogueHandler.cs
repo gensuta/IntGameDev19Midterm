@@ -160,6 +160,7 @@ public class DialogueHandler : MonoBehaviour
 
         if (!isBattleMode && !isShowingDefeat)
         {
+            ac.FadeOut();
             sc.WaitThenLoad("Battle", 1f, 1);
             //to ensure the label is off during the transition
             label.SetActive(false);

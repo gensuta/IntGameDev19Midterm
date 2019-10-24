@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bubbly
   m_EditorClassIdentifier: 
   _name: Bubbly
-  ps: {fileID: 0}
+  ps: {fileID: 6443686984394151046, guid: e9e51f8985d0a431e88adeb3c03eba72, type: 3}
   neutralPose: {fileID: 0}
   myModel: {fileID: -927199367670048503, guid: ad4362e54740b46b6a63880fb14fd3ba, type: 3}
   customRotation: {x: -90, y: -90, z: 0}

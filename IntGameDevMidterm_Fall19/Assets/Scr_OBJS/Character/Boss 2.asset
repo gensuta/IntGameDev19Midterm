@@ -15,19 +15,29 @@ MonoBehaviour:
   hasShownDefeatedLines: 0
   isDefeated: 0
   _name: Shy
-  maxBp: 25
+  maxBp: 40
   currentBp: 0
   _type: 0
   willBreakBond: 1
   bondWanted: 1
   exploreLines:
-  - heyyy!
-  - what's going on?
-  - wanna chat for a bit?
-  defeatLines: []
-  winLines: []
+  - '...So how''s fighting your anxiety going?'
+  - Oh wait... I meant fighting me...Lmao.
+  - Like, <i> wow.</i> Yelling at yourself to calm down is tooootally going to work.
+  - All I'm trying to do is protect you...
+  - Y'know what? Let's fight for real.
+  defeatLines:
+  - Oh. You don't want to fight this time.
+  - Ah. I mean. That's refreshing.
+  - Thanks for trying to understand me better.
+  - '...goodluck with raw...'
+  winLines:
+  - Ah. So you didn't want to fight me it seems.
+  - Sorry..God Sorry..
+  - Maybe we can work things out next time...
   myModel: {fileID: -927199367670048503, guid: b8d285b833bac4bc4b84c174c38bfb5d, type: 3}
   myAnim: {fileID: 0}
   moves:
-  - {fileID: 11400000, guid: e26ce65bf79bb4cecb452abbdc0582fe, type: 2}
-  - {fileID: 11400000, guid: 86794bea6b26842c3b1c20ade7c0afc5, type: 2}
+  - {fileID: 11400000, guid: 274608c8eb4214763942eb8962a892ae, type: 2}
+  - {fileID: 11400000, guid: b17fb2ec8701947f8a6f926c598f9602, type: 2}
+  customRotation: {x: -90, y: 0, z: 0}

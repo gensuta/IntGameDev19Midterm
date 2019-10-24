@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: compliment
   doesDmg: 0
-  amount: 4
-  moveCost: 4
+  amount: 3
+  moveCost: 5
   onSelf: 0
   moveType: 0
   dialogue:

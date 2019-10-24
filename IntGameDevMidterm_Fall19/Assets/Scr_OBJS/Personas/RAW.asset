@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RAW
   m_EditorClassIdentifier: 
   _name: RAW
-  ps: {fileID: 0}
+  ps: {fileID: 6263923830288766044, guid: cf00f08230dde4d368756b8a321a4f43, type: 3}
   neutralPose: {fileID: 0}
   myModel: {fileID: -927199367670048503, guid: 9eff62b403a25441b87307f9e742b6b7, type: 3}
   customRotation: {x: 0, y: 90, z: 0}

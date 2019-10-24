@@ -102,13 +102,11 @@ public class SceneController : MonoBehaviour
     public void LoadScene(int num)
     {
         SceneManager.LoadScene(num);
-        ac.GetSFXSource();
     }
 
     public void LoadScene(string sName)
     {
         SceneManager.LoadScene(sName);
-        ac.GetSFXSource();
 
     }
 
