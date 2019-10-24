@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: dissociate
   doesDmg: 1
-  amount: 5
+  amount: 3
+  moveCost: 4
   onSelf: 0
   moveType: 1
-  moveCost: 1
   dialogue:
   - '...'

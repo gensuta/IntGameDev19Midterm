@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: mumble
   doesDmg: 1
-  amount: 6
+  amount: 4
   moveCost: 3
   onSelf: 0
   moveType: 1

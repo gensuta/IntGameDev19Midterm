@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Vibe Check
   doesDmg: 0
   amount: 5
-  moveCost: 0
+  moveCost: 6
   onSelf: 0
   moveType: 0
   dialogue:

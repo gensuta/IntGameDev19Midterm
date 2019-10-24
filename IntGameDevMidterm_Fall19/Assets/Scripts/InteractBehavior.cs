@@ -11,7 +11,7 @@ public class InteractBehavior : MonoBehaviour
     public string _name;
 
     float waitTime = 0.5f; // allow dialogue handler to find the CORRECT audio
-    bool dialogueStarted;
+    public bool dialogueStarted;
 
     
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class InteractBehavior : MonoBehaviour
 
         if (gc.CheckIfGone(_name))
         {
-            Destroy(gameObject,1.5f);
+            Destroy(gameObject);
         }
     }
 
@@ -32,7 +32,7 @@ public class InteractBehavior : MonoBehaviour
     void Update()
     {
 
-        if (gc.CheckIfDefeated(_name) && !dh.isActive)
+        if (gc.CheckIfDefeated(_name) && !dh.isActive && gc.CheckIfGone(_name))
         {
             waitTime -= Time.deltaTime;
             if(waitTime <= 0f)
@@ -41,12 +41,12 @@ public class InteractBehavior : MonoBehaviour
                 {
                     if (_name == "RAW")
                     {
-                        sc.WaitThenLoad("EndScene", 0.75f);
+                        sc.WaitThenLoad("EndScene", 0.15f);
                     }
                     else
                     {
                         transform.position += new Vector3(0f, -0.15f, 0f);
-                        Destroy(gameObject, 1.5f);
+                        Destroy(gameObject, 2.5f);
                     }
                 }
                 else

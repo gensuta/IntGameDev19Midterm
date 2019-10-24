@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: vent
   doesDmg: 1
   amount: 4
+  moveCost: 6
   onSelf: 0
   moveType: 1
   dialogue:

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: random meme
   m_EditorClassIdentifier: 
   _name: random meme
-  doesDmg: 1
+  doesDmg: 0
   amount: 3
-  moveCost: 2
+  moveCost: 4
   onSelf: 0
   moveType: 2
   dialogue:
@@ -27,7 +27,7 @@ MonoBehaviour:
     Out*'
   - '*salary cutting noise*'
   - That's it. I'm at my limit.
-  - Aren't you tired of being nice? Don't you wanna go apes)(1t? :)
+  - Aren't you tired of being nice? Don't you wanna go apeshit? :)
   - This is fine.
   - '*chuckles* I''m in danger.'
   - Serotonin? Spare serotonin?

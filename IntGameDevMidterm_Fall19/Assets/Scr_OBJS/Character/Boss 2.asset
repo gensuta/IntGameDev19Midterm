@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93a1a0fa9bb84ea28e6ac109a059f95, type: 3}
   m_Name: Boss 2
   m_EditorClassIdentifier: 
-  hasShownDefeatedLines: 0
-  isDefeated: 0
+  hasShownDefeatedLines: 1
+  isDefeated: 1
   _name: Shy
   maxBp: 40
   currentBp: 0
@@ -35,9 +35,11 @@ MonoBehaviour:
   - Ah. So you didn't want to fight me it seems.
   - Sorry..God Sorry..
   - Maybe we can work things out next time...
-  myModel: {fileID: -927199367670048503, guid: b8d285b833bac4bc4b84c174c38bfb5d, type: 3}
+  myModel: {fileID: 8940808054517898591, guid: a3253a0fa6c72474c8e3ccf076e1d224, type: 3}
   myAnim: {fileID: 0}
   moves:
   - {fileID: 11400000, guid: 274608c8eb4214763942eb8962a892ae, type: 2}
   - {fileID: 11400000, guid: b17fb2ec8701947f8a6f926c598f9602, type: 2}
-  customRotation: {x: -90, y: 0, z: 0}
+  - {fileID: 11400000, guid: b17fb2ec8701947f8a6f926c598f9602, type: 2}
+  - {fileID: 11400000, guid: 274608c8eb4214763942eb8962a892ae, type: 2}
+  customRotation: {x: -90, y: 0, z: 180}

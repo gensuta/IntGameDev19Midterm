@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RAWW
   m_EditorClassIdentifier: 
   _name: '"Vibe Check"'
-  doesDmg: 0
+  doesDmg: 1
   amount: 5
   moveCost: 0
   onSelf: 0

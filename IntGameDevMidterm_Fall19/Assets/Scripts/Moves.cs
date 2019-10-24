@@ -48,17 +48,30 @@ public class Moves : ScriptableObject
     {
         GameController.Types playerType = target.myPersonas[target.currentPersona]._type;
 
-
         if (doesDmg)
 		{
             GameController.gc.ac.PlaySFX(GameController.gc.ac.battleNoises[1]);
-            target.bp -= DetermineTrueAmount(moveType, playerType, amount);
+            if (GameController.gc.isBossBattle)
+            {
+                target.bp -= amount;
+            }
+            else
+            {
+                target.bp -= DetermineTrueAmount(moveType, playerType, amount);
+            }
 
 		}
 		else
 		{
             GameController.gc.ac.PlaySFX(GameController.gc.ac.battleNoises[0]);
-            target.bp += DetermineTrueAmount(moveType, playerType, amount);
+            if (GameController.gc.isBossBattle)
+            {
+                target.bp += amount;
+            }
+            else
+            {
+                target.bp += DetermineTrueAmount(moveType, playerType, amount);
+            }
 		}
     }
 

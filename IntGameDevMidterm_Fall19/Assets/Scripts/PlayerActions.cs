@@ -65,6 +65,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
                 i++;
             }
         }
+       
     }
 
     void Start()
@@ -91,11 +92,18 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
         storedBp = bp;
         storedMp = mp;
-        if (bh.opponent._name == "Bubbly" && bh.opponent._name == "Shy" && bh.opponent._name == "RAW")
+
+        if (bh.opponent._name != "Bubbly" && bh.opponent._name != "Shy" && bh.opponent._name != "RAW")
         {
             currentPersonaObj = myPersonas[currentPersona].SpawnMe(personaPos, this);
             ShowPersonaFX();
         }
+        else
+        {
+            GameController.gc.isBossBattle = true;
+        }
+
+        ac.BeginBattleMusic();
     }
 
     // Update is called once per frame
@@ -175,13 +183,14 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     {
         if (mp > 0)
         {
+            backButton.SetActive(true);
             actionHolder.SetActive(false);
             moveHolder.SetActive(true);
             int whichMove = 0;
             foreach (Button button in moveHolder.GetComponentsInChildren<Button>())
             {
-                if (bh.opponent._name != "A new friend" && bh.opponent._name != "A cool person")
-                {
+                if (bh.opponent._name != "Shy" && bh.opponent._name != "Bubbly" && bh.opponent._name != "RAW")
+                { 
                     button.GetComponentInChildren<TextMeshProUGUI>().text = myPersonas[currentPersona].moves[whichMove]._name;
                     whichMove++;
                 }
@@ -228,17 +237,21 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         }
         else
         {
-            if (bh.opponent._name != "A new friend" && bh.opponent._name != "A cool person")
+            if (bh.opponent._name == "A new friend" || bh.opponent._name == "A cool person")
             {
-                ChangeForReal(whichPersona);
-            }
-            else
-            {
-                if(myPersonas[whichPersona].name == "RAW")
+                if (myPersonas[whichPersona].name == "RAW")
                 {
                     backButton.SetActive(false);
                     dh.DisplayBattleText("They CAN NOT interact with this one.");
                 }
+                else
+                {
+                    ChangeForReal(whichPersona);
+                }
+            }
+            else
+            {
+                ChangeForReal(whichPersona);
             }
            
         }
@@ -325,7 +338,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
 
         Moves currentMove;
 
-        if (bh.opponent._name != "A new friend" && bh.opponent._name != "A cool person")
+        if (bh.opponent._name != "Shy" && bh.opponent._name != "Bubbly" && bh.opponent._name != "RAW")
         {
             currentMove = myPersonas[currentPersona].moves[whichMove];
         }
@@ -335,7 +348,7 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
         }
 
         storedMove = currentMove;
-        if (currentMove.amount < mp)
+        if (currentMove.amount <= mp)
         {
             playerHolder.SetActive(false);
             currentMove.UseMove(bh.opponent, this);
@@ -386,6 +399,10 @@ public class PlayerActions : MonoBehaviour // BATTLE!! ACTIONS!!
     void ShowOrHideActions(bool isShow) // false hide true show
     {
         actionHolder.SetActive(isShow);
+        if(bh.opponent._name == "Shy" || bh.opponent._name == "Bubbly" || bh.opponent._name == "RAW")
+        {
+            personaButton.SetActive(false);
+        }
     }
 
 

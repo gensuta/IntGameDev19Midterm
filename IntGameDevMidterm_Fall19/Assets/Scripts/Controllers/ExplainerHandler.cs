@@ -7,12 +7,18 @@ using TMPro;
 
 public class ExplainerHandler : MonoBehaviour
 {
+    BattleHandler bh;
     PlayerActions player;
     public TextMeshProUGUI moveExplain;
     public TextMeshProUGUI personaExplain;
+
+    public Sprite[] types;
+    public Image moveRep;
+    public Image pRep;
     // Start is called before the first frame update
     void Start()
     {
+        bh = FindObjectOfType<BattleHandler>();
         player = FindObjectOfType<PlayerActions>();
     }
 
@@ -24,8 +30,15 @@ public class ExplainerHandler : MonoBehaviour
 
     public void CheckMoves(int whichMove)
     {
-        Personas persona = player.myPersonas[player.currentPersona];
-        moveExplain.text = Explain(persona.moves[whichMove]);
+        if (bh.opponent._name != "Shy" && bh.opponent._name != "Bubbly" && bh.opponent._name != "RAW")
+        {
+            Personas persona = player.myPersonas[player.currentPersona];
+            moveExplain.text = Explain(persona.moves[whichMove]);
+        }
+        else
+        {
+            moveExplain.text = Explain(player.myMoves[whichMove]);
+        }
     }
 
     public void CheckPersona(int whichP)
@@ -37,16 +50,31 @@ public class ExplainerHandler : MonoBehaviour
     {
         string explanation = "";
         explanation += "Name: " + move._name;
-        explanation += "\n Type: " + move.moveType.ToString();
-        if(move.doesDmg)
+        explanation += "\nType: " + move.moveType.ToString();
+        explanation += " Power:";
+        if (move.doesDmg)
         {
-            explanation += " - Breaks Bonds";
+            explanation += " -" + move.amount;
         }
         else
         {
-            explanation += " - Make Bonds";
+            explanation += " +" + move.amount;
         }
-        explanation += " Power: " + move.amount;
+        explanation += "\nCost: " + move.moveCost;
+
+
+        if(move.moveType == GameController.Types.kindness)
+        {
+            moveRep.sprite = types[0];
+        }
+        else if (move.moveType == GameController.Types.tiredness)
+        {
+            moveRep.sprite = types[1];
+        }
+        else if (move.moveType == GameController.Types.liveliness)
+        {
+            moveRep.sprite = types[2];
+        }
 
         return explanation;
     }
@@ -55,12 +83,26 @@ public class ExplainerHandler : MonoBehaviour
         string explanation = "";
 
         explanation += "Name: " + persona._name;
-        explanation += " Type: " + persona._type.ToString();
+        explanation += "\nType: " + persona._type.ToString();
         explanation += "\nMoves:";
         foreach(Moves move in persona.moves)
         {
             explanation += " " + move._name;
         }
+
+        if (persona._type == GameController.Types.kindness)
+        {
+            pRep.sprite = types[0];
+        }
+        else if (persona._type == GameController.Types.tiredness)
+        {
+            pRep.sprite = types[1];
+        }
+        else if (persona._type == GameController.Types.liveliness)
+        {
+            pRep.sprite = types[2];
+        }
+
         return explanation;
     }
 }

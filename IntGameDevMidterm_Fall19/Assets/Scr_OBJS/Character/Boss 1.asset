@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93a1a0fa9bb84ea28e6ac109a059f95, type: 3}
   m_Name: Boss 1
   m_EditorClassIdentifier: 
-  hasShownDefeatedLines: 0
-  isDefeated: 0
+  hasShownDefeatedLines: 1
+  isDefeated: 1
   _name: Bubbly
   maxBp: 35
   currentBp: 0
@@ -37,9 +37,11 @@ MonoBehaviour:
   - you can't even fight
   - goodluck with the others
   - RAW is ready to tear everything a part
-  myModel: {fileID: -927199367670048503, guid: ad4362e54740b46b6a63880fb14fd3ba, type: 3}
+  myModel: {fileID: 1086556692268298132, guid: 8846db5838ed24f589ee3c6483b47eeb, type: 3}
   myAnim: {fileID: 0}
   moves:
   - {fileID: 11400000, guid: 5e56fe3c87b474eba9e14c1fa64bd270, type: 2}
   - {fileID: 11400000, guid: d610c0423005e4aea801650317197523, type: 2}
-  customRotation: {x: -90, y: 0, z: 0}
+  - {fileID: 11400000, guid: 5e56fe3c87b474eba9e14c1fa64bd270, type: 2}
+  - {fileID: 11400000, guid: d610c0423005e4aea801650317197523, type: 2}
+  customRotation: {x: -90, y: 135, z: 0}

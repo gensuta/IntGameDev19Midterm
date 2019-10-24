@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpMultiplier = 2f;
     public float jumpSpeed;
 
+    bool meetRaw;
 
 
     int hDir;
@@ -112,11 +113,12 @@ public class PlayerMovement : MonoBehaviour
         {
             InteractBehavior interact = collision.gameObject.GetComponent<InteractBehavior>();
 
-            if (interact.character._name == "RAW")
+            if (interact.character._name == "RAW" && !meetRaw)
             {
                 StartConversation(interact);
                 nearObj = false;
                 canJump = false;
+                meetRaw = true;
             }
             else
             {

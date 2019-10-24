@@ -64,8 +64,6 @@ public class BattleHandler : MonoBehaviour
         {
             ShowGoal();
         }
-
-        ac.BeginBattleMusic();
         
     }
 
@@ -99,7 +97,7 @@ public class BattleHandler : MonoBehaviour
                                 else
                                 {
                                     int randAction = 0;
-                                    randAction = Random.Range(0, 12);
+                                    randAction = Random.Range(0, 50);
 
                                     if (randAction > 2)
                                     {
@@ -122,6 +120,11 @@ public class BattleHandler : MonoBehaviour
                             if (gc.tutTracker < 4)
                             {
                                 gc.tutTracker++;
+                                TutorialHandler tutC = FindObjectOfType<TutorialHandler>();
+                                tutC.wordTracker = -1;
+                                tutC.BeginText(tutC.tutWords[gc.tutTracker].lines);
+                                isPlayerTurn = true;
+                                gc.isTutMode = true;
                             }
                             else if (gc.tutTracker == 5)
                             {
@@ -162,7 +165,7 @@ public class BattleHandler : MonoBehaviour
                 {
                     if (didWin)
                     {
-                        ac.PlaySFX(gc.ac.battleNoises[3]);
+                       // ac.PlaySFX(gc.ac.battleNoises[3]);
                         gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         dh.DisplayBattleText("Battle over!\nYou didn't break down yet! :D ");
 
@@ -173,11 +176,13 @@ public class BattleHandler : MonoBehaviour
                     }
                     else
                     {
-                        ac.PlaySFX(gc.ac.battleNoises[4]);
+                       // ac.PlaySFX(gc.ac.battleNoises[4]);
                         gc.opponents[gc.GetTwin(opponent._name)].isDefeated = true;
                         gc.playerLost = true;
                         player.playerHolder.SetActive(true);
                         dh.DisplayBattleText("Battle over!\n...You're highkey panicking.");
+
+                        ac.SwitchSong(ac.hallwayMusic);
                         sc.WaitThenTransitionAndLoad("Hallway", 3f, 2);
                         doOnce = true;
                     }
@@ -213,7 +218,7 @@ public class BattleHandler : MonoBehaviour
         goalAnim.SetBool("canStart", true);
     }
 
-    bool CheckIfItsOver()
+    public bool CheckIfItsOver()
     {
         bool isOver = false;
         if (opponent.bondWanted)

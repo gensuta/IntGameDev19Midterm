@@ -15,11 +15,8 @@ MonoBehaviour:
   _name: ramble
   doesDmg: 1
   amount: 5
+  moveCost: 0
   onSelf: 0
   moveType: 1
   dialogue:
-  - redactedredactedredacted
-  - r3d4ct3dr3d4ct3dr3d4ct3d
-  - r3d4ct3dredactedr3d4ct3d
-  - redactedr3d4ct3dredacted
-  - detcaderdetcaderdetcader
+  - blablablablablablaimmeanblablablabla

@@ -92,15 +92,15 @@ public class DialogueHandler : MonoBehaviour
         }
         else
         {
-            if (isActive && Input.GetKeyDown(KeyCode.Space))
-            {
-                if (isTyping && !cancelTyping)
-                {
-                    cancelTyping = true;
-                    already = false;
-                    timer = 0.2f;
-                }
-            }
+            //if (isActive && Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    if (isTyping && !cancelTyping)
+            //    {
+            //        cancelTyping = true;
+            //        already = false;
+            //        timer = 0.2f;
+            //    }
+            //}
         }
     }
 

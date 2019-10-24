@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
 
     public Personas lastUsed;
 
+    public bool isBossBattle;
+
     // Start is called before the first frame update
     void Awake()
     {

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93a1a0fa9bb84ea28e6ac109a059f95, type: 3}
   m_Name: Boss 3
   m_EditorClassIdentifier: 
-  hasShownDefeatedLines: 0
-  isDefeated: 0
+  hasShownDefeatedLines: 1
+  isDefeated: 1
   _name: RAW
   maxBp: 45
   currentBp: 0
@@ -43,10 +43,10 @@ MonoBehaviour:
   - MY FLAMES OF FURY CANNOT BE PUT OUT. SO...
   - '...Just sit here and let it out...'
   - '...Maybe we''ll be okay soon...'
-  myModel: {fileID: -927199367670048503, guid: 9eff62b403a25441b87307f9e742b6b7, type: 3}
+  myModel: {fileID: 4107916607693597442, guid: 27ee299020e094258b643cbb2cd2e565, type: 3}
   myAnim: {fileID: 0}
   moves:
   - {fileID: 11400000, guid: 408000ef6bf834818a4075a48c312ae9, type: 2}
   - {fileID: 11400000, guid: 1e3d095471a85424399157d9d838fb69, type: 2}
   - {fileID: 11400000, guid: c25dc3a924d524ab1b3ed0b3d4ed9633, type: 2}
-  customRotation: {x: 0, y: 0, z: 0}
+  customRotation: {x: 0, y: 20, z: 0}

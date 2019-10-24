@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: giggle
   doesDmg: 0
-  amount: 1
+  amount: 2
+  moveCost: 3
   onSelf: 1
   moveType: 2
-  moveCost: 2
   dialogue:
   - lolololol
   - kekekekkekeke

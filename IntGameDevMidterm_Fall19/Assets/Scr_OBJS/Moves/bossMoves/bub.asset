@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: '"giggle"'
   doesDmg: 1
-  amount: 1
+  amount: 3
   moveCost: 2
   onSelf: 0
   moveType: 2

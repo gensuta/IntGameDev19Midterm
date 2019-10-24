@@ -7,6 +7,7 @@ public class AudioController : MonoBehaviour
     SceneController sc;
 
     public AudioSource aud;
+    public AudioSource mAud;
     public AudioSource[] battleAuds;
     public AudioSource sfxAud; // handles sfx
 
@@ -22,7 +23,8 @@ public class AudioController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        aud = GetComponent<AudioSource>();
+        mAud = GetComponent<AudioSource>();
+        aud = mAud;
         sc = FindObjectOfType<SceneController>();
     }
 
@@ -61,19 +63,24 @@ public class AudioController : MonoBehaviour
 
     public void SwitchSong(AudioClip song, bool isLooping = true)
     {
+        mAud.volume = 0;
+        aud = mAud;
+
         foreach (AudioSource _aud in battleAuds)
         {
             _aud.Stop();
         }
 
-        FadeOut();
-        fadingIn = false;
+     
+
+        aud.Play();
         aud.clip = song;
-        aud.loop = isLooping;
+        FadeIn();
     }
 
     public void BeginBattleMusic()
     {
+        mAud.Stop();
         aud.Stop();
         fadingOut = false;
         foreach (AudioSource _aud in battleAuds)
@@ -82,13 +89,47 @@ public class AudioController : MonoBehaviour
             _aud.Play();
         }
 
-        if(sc.GetSceneName() == "Battle")
+
+        PlayerActions player = FindObjectOfType<PlayerActions>();
+        BattleHandler bh = FindObjectOfType<BattleHandler>();
+
+        if (bh.opponent._name != "Shy" && bh.opponent._name != "Bubbly" && bh.opponent._name != "RAW")
         {
-            FadeIn();
-            PlayerActions player = FindObjectOfType<PlayerActions>();
-            aud = battleAuds[player.currentPersona];
+            if (GameController.gc.lastUsed == null)
+            {
+                aud = battleAuds[player.currentPersona];
+            }
+            else
+            {
+                int i = 0;
+                foreach (Personas p in player.myPersonas)
+                {
+                    if (GameController.gc.lastUsed._name == p._name)
+                    {
+                        aud = battleAuds[i];
+                    }
+                    i++;
+                }
+            }
         }
+        else
+        {
+            if (bh.opponent._name == "Bubbly")
+            {
+                aud = battleAuds[0];
+            }
+            if (bh.opponent._name == "Shy")
+            {
+                aud = battleAuds[1];
+            }
+            if (bh.opponent._name == "RAW")
+            {
+                aud = battleAuds[2];
+            }
+        }
+        FadeIn();
     }
+
 
     public void FadeIn(AudioClip song)
     {
@@ -104,8 +145,13 @@ public class AudioController : MonoBehaviour
     {
         if (sc.GetSceneName() == "Battle")
         {
+            BattleHandler bh = FindObjectOfType<BattleHandler>();
             PlayerActions player = FindObjectOfType<PlayerActions>();
-            aud = battleAuds[player.currentPersona];
+
+            if (!bh.CheckIfItsOver())
+            {
+                aud = battleAuds[player.currentPersona];
+            }
         }
 
        // aud.Stop();

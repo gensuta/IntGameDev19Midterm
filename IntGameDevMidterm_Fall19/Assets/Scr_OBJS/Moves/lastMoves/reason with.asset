@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5999c2d582bda4c92b7a59b4f23c9b14, type: 3}
   m_Name: reason with
   m_EditorClassIdentifier: 
-  _name: 
+  _name: reason with
   doesDmg: 0
-  amount: 0
-  moveCost: 0
+  amount: 5
+  moveCost: 11
   onSelf: 0
   moveType: 0
-  dialogue: []
+  dialogue:
+  - "We may fight a lot, but that doesn't mean we can't get along.\t"
+  - Please. Help me understand you.
+  - I'm sorry for ignoring you. Can we work together?

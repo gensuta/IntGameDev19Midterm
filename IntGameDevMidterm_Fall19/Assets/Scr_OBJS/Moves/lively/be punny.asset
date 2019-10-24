@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: be punny
   m_EditorClassIdentifier: 
   _name: be punny
-  doesDmg: 1
-  amount: 5
+  doesDmg: 0
+  amount: 3
+  moveCost: 3
   onSelf: 0
   moveType: 2
-  moveCost: 3
   dialogue:
   - Last night, I dreamed I was swimming in an ocean of orange soda. But it was just
     a Fanta sea

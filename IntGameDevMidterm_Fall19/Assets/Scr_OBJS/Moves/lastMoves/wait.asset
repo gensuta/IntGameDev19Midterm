@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5999c2d582bda4c92b7a59b4f23c9b14, type: 3}
   m_Name: wait
   m_EditorClassIdentifier: 
-  _name: 
+  _name: wait
   doesDmg: 0
-  amount: 0
-  moveCost: 0
+  amount: 4
+  moveCost: 7
   onSelf: 0
-  moveType: 0
-  dialogue: []
+  moveType: 1
+  dialogue:
+  - I'm listening.

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93a1a0fa9bb84ea28e6ac109a059f95, type: 3}
   m_Name: Person C
   m_EditorClassIdentifier: 
-  hasShownDefeatedLines: 0
-  isDefeated: 0
+  hasShownDefeatedLines: 1
+  isDefeated: 1
   _name: r3d4ct3d
   maxBp: 20
   currentBp: 20
